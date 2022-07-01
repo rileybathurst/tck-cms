@@ -1,0 +1,35 @@
+{
+  "kind": "collectionType",
+  "collectionName": "tours",
+  "info": {
+    "singularName": "tour",
+    "pluralName": "tours",
+    "displayName": "tour"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "slug": {
+      "type": "string",
+      "required": true,
+      "unique": true,
+      "regex": "^[a-z0-9\\-]*$"
+    },
+    "information": {
+      "type": "richtext"
+    },
+    "start": {
+      "type": "time"
+    },
+    "finish": {
+      "type": "time"
+    }
+  }
+}
