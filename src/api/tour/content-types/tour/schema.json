@@ -4,7 +4,8 @@
   "info": {
     "singularName": "tour",
     "pluralName": "tours",
-    "displayName": "tour"
+    "displayName": "tour",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -30,6 +31,47 @@
     },
     "finish": {
       "type": "time"
+    },
+    "peek": {
+      "type": "string"
+    },
+    "price": {
+      "type": "integer"
+    },
+    "minimum": {
+      "type": "integer"
+    },
+    "duration": {
+      "type": "decimal"
+    },
+    "fitness": {
+      "type": "enumeration",
+      "enum": [
+        "easy",
+        "moderate"
+      ]
+    },
+    "sport": {
+      "type": "enumeration",
+      "enum": [
+        "kayak",
+        "sup"
+      ]
+    },
+    "excerpt": {
+      "type": "string",
+      "maxLength": 160,
+      "minLength": 120
+    },
+    "ogimage": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": false
     }
   }
 }
