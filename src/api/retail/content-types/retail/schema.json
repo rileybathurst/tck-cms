@@ -1,0 +1,112 @@
+{
+  "kind": "collectionType",
+  "collectionName": "retails",
+  "info": {
+    "singularName": "retail",
+    "pluralName": "retails",
+    "displayName": "retail",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "slug": {
+      "type": "string",
+      "unique": true,
+      "required": true,
+      "regex": "^[a-z0-9\\-]*$"
+    },
+    "crew": {
+      "type": "enumeration",
+      "enum": [
+        "single",
+        "tandem",
+        "quad"
+      ]
+    },
+    "capacity": {
+      "type": "integer"
+    },
+    "length": {
+      "type": "decimal"
+    },
+    "hullweight": {
+      "type": "decimal"
+    },
+    "riggedweight": {
+      "type": "decimal"
+    },
+    "width": {
+      "type": "decimal"
+    },
+    "description": {
+      "type": "richtext"
+    },
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "sup",
+        "kayak"
+      ]
+    },
+    "features": {
+      "type": "richtext"
+    },
+    "thickness": {
+      "type": "decimal"
+    },
+    "volume": {
+      "type": "decimal"
+    },
+    "series": {
+      "type": "enumeration",
+      "enum": [
+        "mirage",
+        "island",
+        "inflatable",
+        "performance",
+        "recreational",
+        "sit-on-top",
+        "adventure recreational",
+        "light touring"
+      ]
+    },
+    "inflatable": {
+      "type": "boolean"
+    },
+    "demo": {
+      "type": "boolean"
+    },
+    "cutout": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "excerpt": {
+      "type": "string",
+      "maxLength": 160,
+      "minLength": 120,
+      "required": true
+    },
+    "brand": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::brand.brand",
+      "inversedBy": "retail"
+    },
+    "price": {
+      "type": "decimal"
+    }
+  }
+}

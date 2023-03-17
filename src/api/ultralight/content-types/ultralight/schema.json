@@ -1,0 +1,18 @@
+{
+  "kind": "singleType",
+  "collectionName": "ultralights",
+  "info": {
+    "singularName": "ultralight",
+    "pluralName": "ultralights",
+    "displayName": "ultralight"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "info": {
+      "type": "richtext"
+    }
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "kind": "singleType",
+  "collectionName": "infos",
+  "info": {
+    "singularName": "info",
+    "pluralName": "infos",
+    "displayName": "info"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "slogan": {
+      "type": "string"
+    },
+    "about": {
+      "type": "string"
+    },
+    "tours": {
+      "type": "string"
+    },
+    "retail": {
+      "type": "string"
+    },
+    "demo": {
+      "type": "string"
+    }
+  }
+}

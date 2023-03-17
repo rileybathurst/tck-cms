@@ -1,0 +1,21 @@
+{
+  "kind": "collectionType",
+  "collectionName": "paddle_infos",
+  "info": {
+    "singularName": "paddle-info",
+    "pluralName": "paddle-infos",
+    "displayName": "paddle-info"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "info": {
+      "type": "richtext"
+    }
+  }
+}
