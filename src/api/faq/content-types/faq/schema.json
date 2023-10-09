@@ -16,6 +16,12 @@
     },
     "answer": {
       "type": "string"
+    },
+    "attributes": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::attribute.attribute",
+      "mappedBy": "faqs"
     }
   }
 }

@@ -107,6 +107,18 @@
     },
     "price": {
       "type": "decimal"
+    },
+    "featured": {
+      "type": "boolean"
+    },
+    "discount": {
+      "type": "integer"
+    },
+    "rental_rate": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::rental-rate.rental-rate",
+      "mappedBy": "retail"
     }
   }
 }

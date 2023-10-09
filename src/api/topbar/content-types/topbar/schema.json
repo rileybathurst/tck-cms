@@ -4,7 +4,8 @@
   "info": {
     "singularName": "topbar",
     "pluralName": "topbars",
-    "displayName": "topbar"
+    "displayName": "topbar",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -13,6 +14,9 @@
   "attributes": {
     "text": {
       "type": "string"
+    },
+    "markdown": {
+      "type": "richtext"
     }
   }
 }

@@ -47,6 +47,7 @@
     "fitness": {
       "type": "enumeration",
       "enum": [
+        "easy peasy",
         "easy",
         "easy / moderate",
         "moderate"
@@ -74,6 +75,9 @@
         "videos",
         "audios"
       ]
+    },
+    "featured": {
+      "type": "boolean"
     }
   }
 }
