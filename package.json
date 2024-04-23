@@ -1,8 +1,8 @@
 {
   "name": "tck-cms",
   "private": true,
-  "version": "0.1.0",
-  "description": "A Strapi application",
+  "version": "1.1.0",
+  "description": "Tahoe City Kayak Strapi CMS",
   "scripts": {
     "develop": "strapi develop",
     "start": "strapi start",
@@ -10,12 +10,13 @@
     "strapi": "strapi"
   },
   "dependencies": {
-    "@strapi/plugin-i18n": "4.14.3",
-    "@strapi/plugin-users-permissions": "4.14.3",
-    "@strapi/strapi": "4.14.3",
-    "better-sqlite3": "8.7.0",
+    "@strapi/plugin-users-permissions": "4.20.4",
+    "@strapi/strapi": "4.20.4",
+    "better-sqlite3": "9.4.3",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^5.3.4",
+    "styled-components": "^5.3.11"
   },
   "author": {
     "name": "A Strapi developer"
@@ -24,7 +25,7 @@
     "uuid": "9175ad9a-4f2a-4e05-bd6b-1340227e07ae"
   },
   "engines": {
-    "node": ">=12.x.x <=16.x.x",
+    "node": ">=18.0.0 <=20.x.x",
     "npm": ">=6.0.0"
   },
   "license": "MIT"

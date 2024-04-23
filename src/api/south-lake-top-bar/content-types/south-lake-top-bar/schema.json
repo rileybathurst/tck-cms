@@ -1,18 +1,17 @@
 {
   "kind": "singleType",
-  "collectionName": "topbars",
+  "collectionName": "south_lake_top_bars",
   "info": {
-    "singularName": "topbar",
-    "pluralName": "topbars",
-    "displayName": "topbar",
+    "singularName": "south-lake-top-bar",
+    "pluralName": "south-lake-top-bars",
+    "displayName": "South Lake Top Bar",
     "description": ""
   },
   "options": {
     "draftAndPublish": true
   },
-  "pluginOptions": {},
   "attributes": {
-    "markdown": {
+    "topbar": {
       "type": "richtext"
     },
     "expiration": {

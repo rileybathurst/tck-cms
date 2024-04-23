@@ -1,0 +1,41 @@
+{
+  "kind": "singleType",
+  "collectionName": "south_lake_locations",
+  "info": {
+    "singularName": "south-lake-location",
+    "pluralName": "south-lake-locations",
+    "displayName": "South Lake Location"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "on_water_location": {
+      "type": "string"
+    },
+    "on_water_google_map_link": {
+      "type": "string"
+    },
+    "season_start": {
+      "type": "date"
+    },
+    "season_end": {
+      "type": "date"
+    },
+    "open": {
+      "type": "boolean"
+    },
+    "daily_opening": {
+      "type": "time"
+    },
+    "daily_closing": {
+      "type": "time"
+    },
+    "parking_location": {
+      "type": "string"
+    },
+    "parking_google_maps_link": {
+      "type": "string"
+    }
+  }
+}
