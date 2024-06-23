@@ -1,27 +1,27 @@
 {
   "kind": "collectionType",
-  "collectionName": "paddle_infos",
+  "collectionName": "jobs",
   "info": {
-    "singularName": "paddle-info",
-    "pluralName": "paddle-infos",
-    "displayName": "paddle-info"
+    "singularName": "job",
+    "pluralName": "jobs",
+    "displayName": "job",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
   },
-  "pluginOptions": {},
   "attributes": {
     "title": {
       "type": "string"
     },
-    "info": {
+    "description": {
       "type": "richtext"
     },
-    "sports": {
+    "locales": {
       "type": "relation",
       "relation": "manyToMany",
-      "target": "api::sport.sport",
-      "mappedBy": "paddle_infos"
+      "target": "api::locale.locale",
+      "inversedBy": "jobs"
     }
   }
 }

@@ -1,0 +1,53 @@
+{
+  "kind": "collectionType",
+  "collectionName": "sports",
+  "info": {
+    "singularName": "sport",
+    "pluralName": "sports",
+    "displayName": "sport"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "slug": {
+      "type": "string"
+    },
+    "description": {
+      "type": "richtext"
+    },
+    "attributes": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::attribute.attribute",
+      "mappedBy": "sport"
+    },
+    "brands": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::brand.brand",
+      "inversedBy": "sports"
+    },
+    "retails": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::retail.retail",
+      "mappedBy": "sport"
+    },
+    "paddle_infos": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::paddle-info.paddle-info",
+      "inversedBy": "sports"
+    },
+    "announcements": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::announcement.announcement",
+      "mappedBy": "sports"
+    }
+  }
+}

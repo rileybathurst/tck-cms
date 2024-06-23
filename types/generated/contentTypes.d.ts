@@ -771,6 +771,56 @@ export interface ApiAboutAbout extends Schema.SingleType {
   };
 }
 
+export interface ApiAnnouncementAnnouncement extends Schema.CollectionType {
+  collectionName: 'announcements';
+  info: {
+    singularName: 'announcement';
+    pluralName: 'announcements';
+    displayName: 'announcement';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Attribute.String;
+    post: Attribute.RichText;
+    locales: Attribute.Relation<
+      'api::announcement.announcement',
+      'manyToMany',
+      'api::locale.locale'
+    >;
+    locations: Attribute.Relation<
+      'api::announcement.announcement',
+      'manyToMany',
+      'api::location.location'
+    >;
+    calendar: Attribute.DateTime;
+    sports: Attribute.Relation<
+      'api::announcement.announcement',
+      'manyToMany',
+      'api::sport.sport'
+    >;
+    slug: Attribute.String;
+    hero: Attribute.Media;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::announcement.announcement',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::announcement.announcement',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiAttributeAttribute extends Schema.CollectionType {
   collectionName: 'attributes';
   info: {
@@ -791,6 +841,11 @@ export interface ApiAttributeAttribute extends Schema.CollectionType {
       'manyToMany',
       'api::faq.faq'
     >;
+    sport: Attribute.Relation<
+      'api::attribute.attribute',
+      'manyToOne',
+      'api::sport.sport'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -805,6 +860,37 @@ export interface ApiAttributeAttribute extends Schema.CollectionType {
       'oneToOne',
       'admin::user'
     > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiBlogBlog extends Schema.CollectionType {
+  collectionName: 'blogs';
+  info: {
+    singularName: 'blog';
+    pluralName: 'blogs';
+    displayName: 'blog';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Attribute.String;
+    slug: Attribute.String & Attribute.Unique;
+    markdown: Attribute.RichText;
+    locales: Attribute.Relation<
+      'api::blog.blog',
+      'oneToMany',
+      'api::locale.locale'
+    >;
+    tags: Attribute.Text & Attribute.DefaultTo<'- '>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<'api::blog.blog', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<'api::blog.blog', 'oneToOne', 'admin::user'> &
       Attribute.Private;
   };
 }
@@ -834,6 +920,11 @@ export interface ApiBrandBrand extends Schema.CollectionType {
     kayak: Attribute.Boolean;
     sup: Attribute.Boolean;
     svglogo: Attribute.RichText;
+    sports: Attribute.Relation<
+      'api::brand.brand',
+      'manyToMany',
+      'api::sport.sport'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -848,6 +939,28 @@ export interface ApiBrandBrand extends Schema.CollectionType {
       'oneToOne',
       'admin::user'
     > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiDemoDemo extends Schema.SingleType {
+  collectionName: 'demos';
+  info: {
+    singularName: 'demo';
+    pluralName: 'demos';
+    displayName: 'demo';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    text: Attribute.RichText;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<'api::demo.demo', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<'api::demo.demo', 'oneToOne', 'admin::user'> &
       Attribute.Private;
   };
 }
@@ -976,6 +1089,120 @@ export interface ApiImagegrabImagegrab extends Schema.CollectionType {
   };
 }
 
+export interface ApiJobJob extends Schema.CollectionType {
+  collectionName: 'jobs';
+  info: {
+    singularName: 'job';
+    pluralName: 'jobs';
+    displayName: 'job';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Attribute.String;
+    description: Attribute.RichText;
+    locales: Attribute.Relation<
+      'api::job.job',
+      'manyToMany',
+      'api::locale.locale'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<'api::job.job', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<'api::job.job', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+  };
+}
+
+export interface ApiLocaleLocale extends Schema.CollectionType {
+  collectionName: 'locales';
+  info: {
+    singularName: 'locale';
+    pluralName: 'locales';
+    displayName: 'locale';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String;
+    slug: Attribute.String & Attribute.Unique;
+    locations: Attribute.Relation<
+      'api::locale.locale',
+      'oneToMany',
+      'api::location.location'
+    >;
+    season_start: Attribute.Date;
+    season_end: Attribute.Date;
+    about: Attribute.RichText;
+    tours: Attribute.Relation<
+      'api::locale.locale',
+      'oneToMany',
+      'api::tour.tour'
+    >;
+    testimonials: Attribute.Relation<
+      'api::locale.locale',
+      'oneToMany',
+      'api::testimonial.testimonial'
+    >;
+    blog: Attribute.Relation<
+      'api::locale.locale',
+      'manyToOne',
+      'api::blog.blog'
+    >;
+    topbar: Attribute.RichText;
+    phone: Attribute.BigInteger;
+    email: Attribute.String;
+    jobs: Attribute.Relation<
+      'api::locale.locale',
+      'manyToMany',
+      'api::job.job'
+    >;
+    url: Attribute.String;
+    announcements: Attribute.Relation<
+      'api::locale.locale',
+      'manyToMany',
+      'api::announcement.announcement'
+    >;
+    peek_base: Attribute.String;
+    peek_tours: Attribute.String;
+    peek_rentals: Attribute.String;
+    peek_single: Attribute.String;
+    peek_double: Attribute.String;
+    peek_paddleboard: Attribute.String;
+    ogImage: Attribute.String;
+    latitude: Attribute.Decimal;
+    longitude: Attribute.Decimal;
+    geoRadius: Attribute.Integer;
+    themeColor: Attribute.String;
+    numberOfEmployees: Attribute.String;
+    ogimagedescription: Attribute.String;
+    instagram: Attribute.String;
+    facebook: Attribute.String;
+    tripadvisor: Attribute.String;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::locale.locale',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::locale.locale',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiLocationLocation extends Schema.CollectionType {
   collectionName: 'locations';
   info: {
@@ -992,8 +1219,25 @@ export interface ApiLocationLocation extends Schema.CollectionType {
     svg: Attribute.Text;
     description: Attribute.RichText;
     link: Attribute.Text;
-    title_link: Attribute.Boolean;
     order: Attribute.Integer;
+    address: Attribute.RichText;
+    opening_time: Attribute.Time;
+    closing_time: Attribute.Time;
+    locale: Attribute.Relation<
+      'api::location.location',
+      'manyToOne',
+      'api::locale.locale'
+    >;
+    announcements: Attribute.Relation<
+      'api::location.location',
+      'manyToMany',
+      'api::announcement.announcement'
+    >;
+    streetAddress: Attribute.String;
+    addressLocality: Attribute.String;
+    addressRegion: Attribute.String;
+    postalCode: Attribute.String;
+    paymentAccepted: Attribute.Text;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1025,6 +1269,11 @@ export interface ApiPaddleInfoPaddleInfo extends Schema.CollectionType {
   attributes: {
     title: Attribute.String;
     info: Attribute.RichText;
+    sports: Attribute.Relation<
+      'api::paddle-info.paddle-info',
+      'manyToMany',
+      'api::sport.sport'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1036,6 +1285,107 @@ export interface ApiPaddleInfoPaddleInfo extends Schema.CollectionType {
       Attribute.Private;
     updatedBy: Attribute.Relation<
       'api::paddle-info.paddle-info',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiPolicyPolicy extends Schema.CollectionType {
+  collectionName: 'policies';
+  info: {
+    singularName: 'policy';
+    pluralName: 'policies';
+    displayName: 'policy';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Attribute.String;
+    description: Attribute.Blocks;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::policy.policy',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::policy.policy',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiRentalRental extends Schema.SingleType {
+  collectionName: 'rentals';
+  info: {
+    singularName: 'rental';
+    pluralName: 'rentals';
+    displayName: 'rental';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    text: Attribute.RichText;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::rental.rental',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::rental.rental',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiRentalAddonRentalAddon extends Schema.CollectionType {
+  collectionName: 'rental_addons';
+  info: {
+    singularName: 'rental-addon';
+    pluralName: 'rental-addons';
+    displayName: 'rental addon';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String;
+    single: Attribute.Integer;
+    double: Attribute.Integer;
+    sup: Attribute.Integer;
+    link: Attribute.String;
+    attribute: Attribute.Relation<
+      'api::rental-addon.rental-addon',
+      'oneToOne',
+      'api::attribute.attribute'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::rental-addon.rental-addon',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::rental-addon.rental-addon',
       'oneToOne',
       'admin::user'
     > &
@@ -1143,6 +1493,11 @@ export interface ApiRetailRetail extends Schema.CollectionType {
       'oneToOne',
       'api::rental-rate.rental-rate'
     >;
+    sport: Attribute.Relation<
+      'api::retail.retail',
+      'manyToOne',
+      'api::sport.sport'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1183,71 +1538,56 @@ export interface ApiShopShop extends Schema.SingleType {
   };
 }
 
-export interface ApiSouthLakeLocationSouthLakeLocation
-  extends Schema.SingleType {
-  collectionName: 'south_lake_locations';
+export interface ApiSportSport extends Schema.CollectionType {
+  collectionName: 'sports';
   info: {
-    singularName: 'south-lake-location';
-    pluralName: 'south-lake-locations';
-    displayName: 'South Lake Location';
+    singularName: 'sport';
+    pluralName: 'sports';
+    displayName: 'sport';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
-    on_water_location: Attribute.String;
-    on_water_google_map_link: Attribute.String;
-    season_start: Attribute.Date;
-    season_end: Attribute.Date;
-    open: Attribute.Boolean;
-    daily_opening: Attribute.Time;
-    daily_closing: Attribute.Time;
-    parking_location: Attribute.String;
-    parking_google_maps_link: Attribute.String;
+    title: Attribute.String;
+    slug: Attribute.String;
+    description: Attribute.RichText;
+    attributes: Attribute.Relation<
+      'api::sport.sport',
+      'oneToMany',
+      'api::attribute.attribute'
+    >;
+    brands: Attribute.Relation<
+      'api::sport.sport',
+      'manyToMany',
+      'api::brand.brand'
+    >;
+    retails: Attribute.Relation<
+      'api::sport.sport',
+      'oneToMany',
+      'api::retail.retail'
+    >;
+    paddle_infos: Attribute.Relation<
+      'api::sport.sport',
+      'manyToMany',
+      'api::paddle-info.paddle-info'
+    >;
+    announcements: Attribute.Relation<
+      'api::sport.sport',
+      'manyToMany',
+      'api::announcement.announcement'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
-      'api::south-lake-location.south-lake-location',
+      'api::sport.sport',
       'oneToOne',
       'admin::user'
     > &
       Attribute.Private;
     updatedBy: Attribute.Relation<
-      'api::south-lake-location.south-lake-location',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiSouthLakeTopBarSouthLakeTopBar extends Schema.SingleType {
-  collectionName: 'south_lake_top_bars';
-  info: {
-    singularName: 'south-lake-top-bar';
-    pluralName: 'south-lake-top-bars';
-    displayName: 'South Lake Top Bar';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    topbar: Attribute.RichText;
-    expiration: Attribute.Date;
-    fallback: Attribute.RichText;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::south-lake-top-bar.south-lake-top-bar',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::south-lake-top-bar.south-lake-top-bar',
+      'api::sport.sport',
       'oneToOne',
       'admin::user'
     > &
@@ -1273,6 +1613,11 @@ export interface ApiTestimonialTestimonial extends Schema.CollectionType {
     sign: Attribute.String;
     source: Attribute.String;
     stars: Attribute.Integer;
+    locale: Attribute.Relation<
+      'api::testimonial.testimonial',
+      'manyToOne',
+      'api::locale.locale'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1284,39 +1629,6 @@ export interface ApiTestimonialTestimonial extends Schema.CollectionType {
       Attribute.Private;
     updatedBy: Attribute.Relation<
       'api::testimonial.testimonial',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiTopbarTopbar extends Schema.SingleType {
-  collectionName: 'topbars';
-  info: {
-    singularName: 'topbar';
-    pluralName: 'topbars';
-    displayName: 'topbar';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    markdown: Attribute.RichText;
-    expiration: Attribute.Date;
-    fallback: Attribute.RichText;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::topbar.topbar',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::topbar.topbar',
       'oneToOne',
       'admin::user'
     > &
@@ -1336,7 +1648,7 @@ export interface ApiTourTour extends Schema.CollectionType {
     draftAndPublish: true;
   };
   attributes: {
-    name: Attribute.String & Attribute.Required & Attribute.Unique;
+    name: Attribute.String & Attribute.Required;
     slug: Attribute.String & Attribute.Required & Attribute.Unique;
     information: Attribute.RichText;
     start: Attribute.Time;
@@ -1356,6 +1668,12 @@ export interface ApiTourTour extends Schema.CollectionType {
       }>;
     ogimage: Attribute.Media;
     featured: Attribute.Boolean;
+    locale: Attribute.Relation<
+      'api::tour.tour',
+      'manyToOne',
+      'api::locale.locale'
+    >;
+    timeframe: Attribute.String;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1384,21 +1702,27 @@ declare module '@strapi/types' {
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'api::about.about': ApiAboutAbout;
+      'api::announcement.announcement': ApiAnnouncementAnnouncement;
       'api::attribute.attribute': ApiAttributeAttribute;
+      'api::blog.blog': ApiBlogBlog;
       'api::brand.brand': ApiBrandBrand;
+      'api::demo.demo': ApiDemoDemo;
       'api::event.event': ApiEventEvent;
       'api::experience.experience': ApiExperienceExperience;
       'api::faq.faq': ApiFaqFaq;
       'api::imagegrab.imagegrab': ApiImagegrabImagegrab;
+      'api::job.job': ApiJobJob;
+      'api::locale.locale': ApiLocaleLocale;
       'api::location.location': ApiLocationLocation;
       'api::paddle-info.paddle-info': ApiPaddleInfoPaddleInfo;
+      'api::policy.policy': ApiPolicyPolicy;
+      'api::rental.rental': ApiRentalRental;
+      'api::rental-addon.rental-addon': ApiRentalAddonRentalAddon;
       'api::rental-rate.rental-rate': ApiRentalRateRentalRate;
       'api::retail.retail': ApiRetailRetail;
       'api::shop.shop': ApiShopShop;
-      'api::south-lake-location.south-lake-location': ApiSouthLakeLocationSouthLakeLocation;
-      'api::south-lake-top-bar.south-lake-top-bar': ApiSouthLakeTopBarSouthLakeTopBar;
+      'api::sport.sport': ApiSportSport;
       'api::testimonial.testimonial': ApiTestimonialTestimonial;
-      'api::topbar.topbar': ApiTopbarTopbar;
       'api::tour.tour': ApiTourTour;
     }
   }

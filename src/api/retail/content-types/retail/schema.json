@@ -119,6 +119,12 @@
       "relation": "oneToOne",
       "target": "api::rental-rate.rental-rate",
       "mappedBy": "retail"
+    },
+    "sport": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::sport.sport",
+      "inversedBy": "retails"
     }
   }
 }

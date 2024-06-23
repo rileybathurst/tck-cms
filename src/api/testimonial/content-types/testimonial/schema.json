@@ -29,6 +29,12 @@
     },
     "stars": {
       "type": "integer"
+    },
+    "locale": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::locale.locale",
+      "inversedBy": "testimonials"
     }
   }
 }

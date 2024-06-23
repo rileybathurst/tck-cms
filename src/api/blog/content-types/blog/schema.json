@@ -1,0 +1,36 @@
+{
+  "kind": "collectionType",
+  "collectionName": "blogs",
+  "info": {
+    "singularName": "blog",
+    "pluralName": "blogs",
+    "displayName": "blog",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "slug": {
+      "type": "string",
+      "unique": true
+    },
+    "markdown": {
+      "type": "richtext"
+    },
+    "locales": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::locale.locale",
+      "mappedBy": "blog"
+    },
+    "tags": {
+      "type": "text",
+      "regex": "^- .*(?:\\n- .*|(?!\\n-).)*$",
+      "default": "- "
+    }
+  }
+}

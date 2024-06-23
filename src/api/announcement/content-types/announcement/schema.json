@@ -1,0 +1,55 @@
+{
+  "kind": "collectionType",
+  "collectionName": "announcements",
+  "info": {
+    "singularName": "announcement",
+    "pluralName": "announcements",
+    "displayName": "announcement",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "post": {
+      "type": "richtext"
+    },
+    "locales": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::locale.locale",
+      "inversedBy": "announcements"
+    },
+    "locations": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::location.location",
+      "inversedBy": "announcements"
+    },
+    "calendar": {
+      "type": "datetime"
+    },
+    "sports": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::sport.sport",
+      "inversedBy": "announcements"
+    },
+    "slug": {
+      "type": "string"
+    },
+    "hero": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": false
+    }
+  }
+}

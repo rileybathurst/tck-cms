@@ -1,0 +1,127 @@
+{
+  "kind": "collectionType",
+  "collectionName": "locales",
+  "info": {
+    "singularName": "locale",
+    "pluralName": "locales",
+    "displayName": "locale",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "slug": {
+      "type": "string",
+      "unique": true
+    },
+    "locations": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::location.location",
+      "mappedBy": "locale"
+    },
+    "season_start": {
+      "type": "date"
+    },
+    "season_end": {
+      "type": "date"
+    },
+    "about": {
+      "type": "richtext"
+    },
+    "tours": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::tour.tour",
+      "mappedBy": "locale"
+    },
+    "testimonials": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::testimonial.testimonial",
+      "mappedBy": "locale"
+    },
+    "blog": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::blog.blog",
+      "inversedBy": "locales"
+    },
+    "topbar": {
+      "type": "richtext"
+    },
+    "phone": {
+      "type": "biginteger"
+    },
+    "email": {
+      "type": "string"
+    },
+    "jobs": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::job.job",
+      "mappedBy": "locales"
+    },
+    "url": {
+      "type": "string"
+    },
+    "announcements": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::announcement.announcement",
+      "mappedBy": "locales"
+    },
+    "peek_base": {
+      "type": "string"
+    },
+    "peek_tours": {
+      "type": "string"
+    },
+    "peek_rentals": {
+      "type": "string"
+    },
+    "peek_single": {
+      "type": "string"
+    },
+    "peek_double": {
+      "type": "string"
+    },
+    "peek_paddleboard": {
+      "type": "string"
+    },
+    "ogImage": {
+      "type": "string"
+    },
+    "latitude": {
+      "type": "decimal"
+    },
+    "longitude": {
+      "type": "decimal"
+    },
+    "geoRadius": {
+      "type": "integer"
+    },
+    "themeColor": {
+      "type": "string"
+    },
+    "numberOfEmployees": {
+      "type": "string"
+    },
+    "ogimagedescription": {
+      "type": "string"
+    },
+    "instagram": {
+      "type": "string"
+    },
+    "facebook": {
+      "type": "string"
+    },
+    "tripadvisor": {
+      "type": "string"
+    }
+  }
+}

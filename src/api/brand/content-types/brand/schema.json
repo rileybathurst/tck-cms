@@ -52,6 +52,12 @@
     },
     "svglogo": {
       "type": "richtext"
+    },
+    "sports": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::sport.sport",
+      "mappedBy": "brands"
     }
   }
 }

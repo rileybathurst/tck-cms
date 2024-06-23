@@ -24,11 +24,45 @@
     "link": {
       "type": "text"
     },
-    "title_link": {
-      "type": "boolean"
-    },
     "order": {
       "type": "integer"
+    },
+    "address": {
+      "type": "richtext"
+    },
+    "opening_time": {
+      "type": "time"
+    },
+    "closing_time": {
+      "type": "time"
+    },
+    "locale": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::locale.locale",
+      "inversedBy": "locations"
+    },
+    "announcements": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::announcement.announcement",
+      "mappedBy": "locations"
+    },
+    "streetAddress": {
+      "type": "string"
+    },
+    "addressLocality": {
+      "type": "string"
+    },
+    "addressRegion": {
+      "type": "string"
+    },
+    "postalCode": {
+      "type": "string"
+    },
+    "paymentAccepted": {
+      "type": "text",
+      "regex": "^- .*(?:\\n- .*|(?!\\n-).)*$"
     }
   }
 }
