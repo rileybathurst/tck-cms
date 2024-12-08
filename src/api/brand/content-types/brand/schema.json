@@ -21,17 +21,6 @@
       "required": true,
       "regex": "^[a-z0-9\\-]*$"
     },
-    "logo": {
-      "type": "media",
-      "multiple": false,
-      "required": false,
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
-      ]
-    },
     "tagline": {
       "type": "string"
     },
@@ -43,15 +32,6 @@
       "relation": "oneToMany",
       "target": "api::retail.retail",
       "mappedBy": "brand"
-    },
-    "kayak": {
-      "type": "boolean"
-    },
-    "sup": {
-      "type": "boolean"
-    },
-    "svglogo": {
-      "type": "richtext"
     },
     "sports": {
       "type": "relation",

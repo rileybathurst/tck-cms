@@ -1,0 +1,20 @@
+{
+  "kind": "singleType",
+  "collectionName": "protects",
+  "info": {
+    "singularName": "protect",
+    "pluralName": "protects",
+    "displayName": "protect"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "details": {
+      "type": "richtext"
+    }
+  }
+}

@@ -63,6 +63,15 @@
     "paymentAccepted": {
       "type": "text",
       "regex": "^- .*(?:\\n- .*|(?!\\n-).)*$"
+    },
+    "commonName": {
+      "type": "string"
+    },
+    "schemaType": {
+      "type": "string"
+    },
+    "offSeasonDetails": {
+      "type": "string"
     }
   }
 }

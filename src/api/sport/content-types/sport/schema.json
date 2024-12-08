@@ -4,7 +4,8 @@
   "info": {
     "singularName": "sport",
     "pluralName": "sports",
-    "displayName": "sport"
+    "displayName": "sport",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -18,12 +19,6 @@
     },
     "description": {
       "type": "richtext"
-    },
-    "attributes": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::attribute.attribute",
-      "mappedBy": "sport"
     },
     "brands": {
       "type": "relation",

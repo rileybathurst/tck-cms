@@ -111,7 +111,7 @@
     "numberOfEmployees": {
       "type": "string"
     },
-    "ogimagedescription": {
+    "ogImageDescription": {
       "type": "string"
     },
     "instagram": {
@@ -121,6 +121,27 @@
       "type": "string"
     },
     "tripadvisor": {
+      "type": "string"
+    },
+    "teams": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::team.team",
+      "mappedBy": "locales"
+    },
+    "excerpt": {
+      "type": "string"
+    },
+    "priceRange": {
+      "type": "string"
+    },
+    "paymentAccepted": {
+      "type": "text"
+    },
+    "slogan": {
+      "type": "string"
+    },
+    "jobEmail": {
       "type": "string"
     }
   }

@@ -1,0 +1,28 @@
+{
+  "kind": "collectionType",
+  "collectionName": "moonlight_tour_date_times",
+  "info": {
+    "singularName": "moonlight-tour-date-time",
+    "pluralName": "moonlight-tour-date-times",
+    "displayName": "moonlight tour date time"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "name": {
+      "type": "string",
+      "unique": true,
+      "required": true
+    },
+    "date": {
+      "type": "date"
+    },
+    "start": {
+      "type": "time"
+    },
+    "finish": {
+      "type": "time"
+    }
+  }
+}

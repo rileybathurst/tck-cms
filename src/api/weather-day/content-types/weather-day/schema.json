@@ -1,0 +1,41 @@
+{
+  "kind": "collectionType",
+  "collectionName": "weather_days",
+  "info": {
+    "singularName": "weather-day",
+    "pluralName": "weather-days",
+    "displayName": "weather day",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "startDate": {
+      "type": "date"
+    },
+    "startTime": {
+      "type": "time"
+    },
+    "link": {
+      "type": "string"
+    },
+    "endDate": {
+      "type": "date"
+    },
+    "endTime": {
+      "type": "time"
+    },
+    "closed": {
+      "type": "boolean"
+    },
+    "condition": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::condition.condition"
+    }
+  }
+}

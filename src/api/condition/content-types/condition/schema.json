@@ -1,0 +1,36 @@
+{
+  "kind": "collectionType",
+  "collectionName": "conditions",
+  "info": {
+    "singularName": "condition",
+    "pluralName": "conditions",
+    "displayName": "condition",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "description": {
+      "type": "richtext"
+    },
+    "closed": {
+      "type": "boolean"
+    },
+    "slug": {
+      "type": "string",
+      "required": true,
+      "unique": true,
+      "regex": "^[a-z0-9_-]+$"
+    },
+    "excerpt": {
+      "type": "string",
+      "required": true,
+      "maxLength": 160,
+      "minLength": 50
+    }
+  }
+}

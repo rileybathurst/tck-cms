@@ -1,0 +1,56 @@
+{
+  "kind": "collectionType",
+  "collectionName": "teams",
+  "info": {
+    "singularName": "team",
+    "pluralName": "teams",
+    "displayName": "team",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "position": {
+      "type": "string"
+    },
+    "locales": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::locale.locale",
+      "inversedBy": "teams"
+    },
+    "order": {
+      "type": "integer"
+    },
+    "profile": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "bio": {
+      "type": "richtext"
+    },
+    "testimonials": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::testimonial.testimonial",
+      "inversedBy": "teams"
+    },
+    "slug": {
+      "type": "string",
+      "regex": "^[a-z0-9_-]+$",
+      "unique": true,
+      "required": true
+    }
+  }
+}

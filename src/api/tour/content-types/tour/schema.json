@@ -87,6 +87,9 @@
     },
     "timeframe": {
       "type": "string"
+    },
+    "experience": {
+      "type": "string"
     }
   }
 }

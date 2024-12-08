@@ -4,7 +4,8 @@
   "info": {
     "singularName": "attribute",
     "pluralName": "attributes",
-    "displayName": "attribute"
+    "displayName": "attribute",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -20,23 +21,10 @@
     "description": {
       "type": "richtext"
     },
-    "type": {
-      "type": "enumeration",
-      "enum": [
-        "kayak",
-        "sup"
-      ]
-    },
     "faqs": {
       "type": "relation",
       "relation": "manyToMany",
       "target": "api::faq.faq",
-      "inversedBy": "attributes"
-    },
-    "sport": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::sport.sport",
       "inversedBy": "attributes"
     }
   }

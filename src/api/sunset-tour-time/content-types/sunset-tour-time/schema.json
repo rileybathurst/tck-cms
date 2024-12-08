@@ -1,0 +1,29 @@
+{
+  "kind": "collectionType",
+  "collectionName": "sunset_tour_times",
+  "info": {
+    "singularName": "sunset-tour-time",
+    "pluralName": "sunset-tour-times",
+    "displayName": "Sunset Tour Times"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "startDate": {
+      "type": "date"
+    },
+    "endDate": {
+      "type": "date"
+    },
+    "startTime": {
+      "type": "time"
+    },
+    "endTime": {
+      "type": "time"
+    }
+  }
+}

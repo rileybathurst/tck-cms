@@ -802,7 +802,7 @@ export interface ApiAnnouncementAnnouncement extends Schema.CollectionType {
       'api::sport.sport'
     >;
     slug: Attribute.String;
-    hero: Attribute.Media;
+    hero: Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -827,6 +827,7 @@ export interface ApiAttributeAttribute extends Schema.CollectionType {
     singularName: 'attribute';
     pluralName: 'attributes';
     displayName: 'attribute';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -835,16 +836,10 @@ export interface ApiAttributeAttribute extends Schema.CollectionType {
     name: Attribute.String;
     slug: Attribute.String;
     description: Attribute.RichText;
-    type: Attribute.Enumeration<['kayak', 'sup']>;
     faqs: Attribute.Relation<
       'api::attribute.attribute',
       'manyToMany',
       'api::faq.faq'
-    >;
-    sport: Attribute.Relation<
-      'api::attribute.attribute',
-      'manyToOne',
-      'api::sport.sport'
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
@@ -909,7 +904,6 @@ export interface ApiBrandBrand extends Schema.CollectionType {
   attributes: {
     name: Attribute.String;
     slug: Attribute.String & Attribute.Required & Attribute.Unique;
-    logo: Attribute.Media;
     tagline: Attribute.String;
     svg: Attribute.Text;
     retail: Attribute.Relation<
@@ -917,9 +911,6 @@ export interface ApiBrandBrand extends Schema.CollectionType {
       'oneToMany',
       'api::retail.retail'
     >;
-    kayak: Attribute.Boolean;
-    sup: Attribute.Boolean;
-    svglogo: Attribute.RichText;
     sports: Attribute.Relation<
       'api::brand.brand',
       'manyToMany',
@@ -936,6 +927,46 @@ export interface ApiBrandBrand extends Schema.CollectionType {
       Attribute.Private;
     updatedBy: Attribute.Relation<
       'api::brand.brand',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiConditionCondition extends Schema.CollectionType {
+  collectionName: 'conditions';
+  info: {
+    singularName: 'condition';
+    pluralName: 'conditions';
+    displayName: 'condition';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String;
+    description: Attribute.RichText;
+    closed: Attribute.Boolean;
+    slug: Attribute.String & Attribute.Required & Attribute.Unique;
+    excerpt: Attribute.String &
+      Attribute.Required &
+      Attribute.SetMinMaxLength<{
+        minLength: 50;
+        maxLength: 160;
+      }>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::condition.condition',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::condition.condition',
       'oneToOne',
       'admin::user'
     > &
@@ -1069,7 +1100,7 @@ export interface ApiImagegrabImagegrab extends Schema.CollectionType {
     draftAndPublish: true;
   };
   attributes: {
-    image: Attribute.Media;
+    image: Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     title: Attribute.String;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
@@ -1181,10 +1212,20 @@ export interface ApiLocaleLocale extends Schema.CollectionType {
     geoRadius: Attribute.Integer;
     themeColor: Attribute.String;
     numberOfEmployees: Attribute.String;
-    ogimagedescription: Attribute.String;
+    ogImageDescription: Attribute.String;
     instagram: Attribute.String;
     facebook: Attribute.String;
     tripadvisor: Attribute.String;
+    teams: Attribute.Relation<
+      'api::locale.locale',
+      'manyToMany',
+      'api::team.team'
+    >;
+    excerpt: Attribute.String;
+    priceRange: Attribute.String;
+    paymentAccepted: Attribute.Text;
+    slogan: Attribute.String;
+    jobEmail: Attribute.String;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1238,6 +1279,9 @@ export interface ApiLocationLocation extends Schema.CollectionType {
     addressRegion: Attribute.String;
     postalCode: Attribute.String;
     paymentAccepted: Attribute.Text;
+    commonName: Attribute.String;
+    schemaType: Attribute.String;
+    offSeasonDetails: Attribute.String;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1249,6 +1293,40 @@ export interface ApiLocationLocation extends Schema.CollectionType {
       Attribute.Private;
     updatedBy: Attribute.Relation<
       'api::location.location',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiMoonlightTourDateTimeMoonlightTourDateTime
+  extends Schema.CollectionType {
+  collectionName: 'moonlight_tour_date_times';
+  info: {
+    singularName: 'moonlight-tour-date-time';
+    pluralName: 'moonlight-tour-date-times';
+    displayName: 'moonlight tour date time';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String & Attribute.Required & Attribute.Unique;
+    date: Attribute.Date;
+    start: Attribute.Time;
+    finish: Attribute.Time;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::moonlight-tour-date-time.moonlight-tour-date-time',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::moonlight-tour-date-time.moonlight-tour-date-time',
       'oneToOne',
       'admin::user'
     > &
@@ -1298,13 +1376,14 @@ export interface ApiPolicyPolicy extends Schema.CollectionType {
     singularName: 'policy';
     pluralName: 'policies';
     displayName: 'policy';
+    description: '';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
     title: Attribute.String;
-    description: Attribute.Blocks;
+    markdown: Attribute.RichText;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1316,6 +1395,37 @@ export interface ApiPolicyPolicy extends Schema.CollectionType {
       Attribute.Private;
     updatedBy: Attribute.Relation<
       'api::policy.policy',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiProtectProtect extends Schema.SingleType {
+  collectionName: 'protects';
+  info: {
+    singularName: 'protect';
+    pluralName: 'protects';
+    displayName: 'protect';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Attribute.String;
+    details: Attribute.RichText;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::protect.protect',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::protect.protect',
       'oneToOne',
       'admin::user'
     > &
@@ -1473,7 +1583,7 @@ export interface ApiRetailRetail extends Schema.CollectionType {
     >;
     inflatable: Attribute.Boolean;
     demo: Attribute.Boolean;
-    cutout: Attribute.Media;
+    cutout: Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     excerpt: Attribute.String &
       Attribute.Required &
       Attribute.SetMinMaxLength<{
@@ -1498,6 +1608,7 @@ export interface ApiRetailRetail extends Schema.CollectionType {
       'manyToOne',
       'api::sport.sport'
     >;
+    link: Attribute.String;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1509,6 +1620,37 @@ export interface ApiRetailRetail extends Schema.CollectionType {
       Attribute.Private;
     updatedBy: Attribute.Relation<
       'api::retail.retail',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiRiverRiver extends Schema.SingleType {
+  collectionName: 'rivers';
+  info: {
+    singularName: 'river';
+    pluralName: 'rivers';
+    displayName: 'river';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Attribute.String;
+    description: Attribute.RichText;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::river.river',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::river.river',
       'oneToOne',
       'admin::user'
     > &
@@ -1544,6 +1686,7 @@ export interface ApiSportSport extends Schema.CollectionType {
     singularName: 'sport';
     pluralName: 'sports';
     displayName: 'sport';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -1552,11 +1695,6 @@ export interface ApiSportSport extends Schema.CollectionType {
     title: Attribute.String;
     slug: Attribute.String;
     description: Attribute.RichText;
-    attributes: Attribute.Relation<
-      'api::sport.sport',
-      'oneToMany',
-      'api::attribute.attribute'
-    >;
     brands: Attribute.Relation<
       'api::sport.sport',
       'manyToMany',
@@ -1595,6 +1733,78 @@ export interface ApiSportSport extends Schema.CollectionType {
   };
 }
 
+export interface ApiSunsetTourTimeSunsetTourTime extends Schema.CollectionType {
+  collectionName: 'sunset_tour_times';
+  info: {
+    singularName: 'sunset-tour-time';
+    pluralName: 'sunset-tour-times';
+    displayName: 'Sunset Tour Times';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String;
+    startDate: Attribute.Date;
+    endDate: Attribute.Date;
+    startTime: Attribute.Time;
+    endTime: Attribute.Time;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::sunset-tour-time.sunset-tour-time',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::sunset-tour-time.sunset-tour-time',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiTeamTeam extends Schema.CollectionType {
+  collectionName: 'teams';
+  info: {
+    singularName: 'team';
+    pluralName: 'teams';
+    displayName: 'team';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String;
+    position: Attribute.String;
+    locales: Attribute.Relation<
+      'api::team.team',
+      'manyToMany',
+      'api::locale.locale'
+    >;
+    order: Attribute.Integer;
+    profile: Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    bio: Attribute.RichText;
+    testimonials: Attribute.Relation<
+      'api::team.team',
+      'manyToMany',
+      'api::testimonial.testimonial'
+    >;
+    slug: Attribute.String & Attribute.Required & Attribute.Unique;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<'api::team.team', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<'api::team.team', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+  };
+}
+
 export interface ApiTestimonialTestimonial extends Schema.CollectionType {
   collectionName: 'testimonials';
   info: {
@@ -1617,6 +1827,11 @@ export interface ApiTestimonialTestimonial extends Schema.CollectionType {
       'api::testimonial.testimonial',
       'manyToOne',
       'api::locale.locale'
+    >;
+    teams: Attribute.Relation<
+      'api::testimonial.testimonial',
+      'manyToMany',
+      'api::team.team'
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
@@ -1666,7 +1881,7 @@ export interface ApiTourTour extends Schema.CollectionType {
         minLength: 120;
         maxLength: 160;
       }>;
-    ogimage: Attribute.Media;
+    ogimage: Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     featured: Attribute.Boolean;
     locale: Attribute.Relation<
       'api::tour.tour',
@@ -1674,12 +1889,55 @@ export interface ApiTourTour extends Schema.CollectionType {
       'api::locale.locale'
     >;
     timeframe: Attribute.String;
+    experience: Attribute.String;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<'api::tour.tour', 'oneToOne', 'admin::user'> &
       Attribute.Private;
     updatedBy: Attribute.Relation<'api::tour.tour', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+  };
+}
+
+export interface ApiWeatherDayWeatherDay extends Schema.CollectionType {
+  collectionName: 'weather_days';
+  info: {
+    singularName: 'weather-day';
+    pluralName: 'weather-days';
+    displayName: 'weather day';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String;
+    startDate: Attribute.Date;
+    startTime: Attribute.Time;
+    link: Attribute.String;
+    endDate: Attribute.Date;
+    endTime: Attribute.Time;
+    closed: Attribute.Boolean;
+    condition: Attribute.Relation<
+      'api::weather-day.weather-day',
+      'oneToOne',
+      'api::condition.condition'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::weather-day.weather-day',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::weather-day.weather-day',
+      'oneToOne',
+      'admin::user'
+    > &
       Attribute.Private;
   };
 }
@@ -1706,6 +1964,7 @@ declare module '@strapi/types' {
       'api::attribute.attribute': ApiAttributeAttribute;
       'api::blog.blog': ApiBlogBlog;
       'api::brand.brand': ApiBrandBrand;
+      'api::condition.condition': ApiConditionCondition;
       'api::demo.demo': ApiDemoDemo;
       'api::event.event': ApiEventEvent;
       'api::experience.experience': ApiExperienceExperience;
@@ -1714,16 +1973,22 @@ declare module '@strapi/types' {
       'api::job.job': ApiJobJob;
       'api::locale.locale': ApiLocaleLocale;
       'api::location.location': ApiLocationLocation;
+      'api::moonlight-tour-date-time.moonlight-tour-date-time': ApiMoonlightTourDateTimeMoonlightTourDateTime;
       'api::paddle-info.paddle-info': ApiPaddleInfoPaddleInfo;
       'api::policy.policy': ApiPolicyPolicy;
+      'api::protect.protect': ApiProtectProtect;
       'api::rental.rental': ApiRentalRental;
       'api::rental-addon.rental-addon': ApiRentalAddonRentalAddon;
       'api::rental-rate.rental-rate': ApiRentalRateRentalRate;
       'api::retail.retail': ApiRetailRetail;
+      'api::river.river': ApiRiverRiver;
       'api::shop.shop': ApiShopShop;
       'api::sport.sport': ApiSportSport;
+      'api::sunset-tour-time.sunset-tour-time': ApiSunsetTourTimeSunsetTourTime;
+      'api::team.team': ApiTeamTeam;
       'api::testimonial.testimonial': ApiTestimonialTestimonial;
       'api::tour.tour': ApiTourTour;
+      'api::weather-day.weather-day': ApiWeatherDayWeatherDay;
     }
   }
 }
