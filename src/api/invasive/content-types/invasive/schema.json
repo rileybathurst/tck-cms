@@ -1,0 +1,27 @@
+{
+  "kind": "singleType",
+  "collectionName": "invasives",
+  "info": {
+    "singularName": "invasive",
+    "pluralName": "invasives",
+    "displayName": "invasive"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "media": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": false
+    }
+  }
+}

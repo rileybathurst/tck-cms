@@ -143,6 +143,12 @@
     },
     "jobEmail": {
       "type": "string"
+    },
+    "RainCheck": {
+      "type": "datetime"
+    },
+    "RainCheckReason": {
+      "type": "string"
     }
   }
 }

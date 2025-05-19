@@ -741,36 +741,6 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
   };
 }
 
-export interface ApiAboutAbout extends Schema.SingleType {
-  collectionName: 'abouts';
-  info: {
-    singularName: 'about';
-    pluralName: 'abouts';
-    displayName: 'about';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    text: Attribute.RichText;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::about.about',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::about.about',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
 export interface ApiAnnouncementAnnouncement extends Schema.CollectionType {
   collectionName: 'announcements';
   info: {
@@ -1120,6 +1090,37 @@ export interface ApiImagegrabImagegrab extends Schema.CollectionType {
   };
 }
 
+export interface ApiInvasiveInvasive extends Schema.SingleType {
+  collectionName: 'invasives';
+  info: {
+    singularName: 'invasive';
+    pluralName: 'invasives';
+    displayName: 'invasive';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Attribute.String;
+    media: Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::invasive.invasive',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::invasive.invasive',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiJobJob extends Schema.CollectionType {
   collectionName: 'jobs';
   info: {
@@ -1226,6 +1227,8 @@ export interface ApiLocaleLocale extends Schema.CollectionType {
     paymentAccepted: Attribute.Text;
     slogan: Attribute.String;
     jobEmail: Attribute.String;
+    RainCheck: Attribute.DateTime;
+    RainCheckReason: Attribute.String;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1959,7 +1962,6 @@ declare module '@strapi/types' {
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
-      'api::about.about': ApiAboutAbout;
       'api::announcement.announcement': ApiAnnouncementAnnouncement;
       'api::attribute.attribute': ApiAttributeAttribute;
       'api::blog.blog': ApiBlogBlog;
@@ -1970,6 +1972,7 @@ declare module '@strapi/types' {
       'api::experience.experience': ApiExperienceExperience;
       'api::faq.faq': ApiFaqFaq;
       'api::imagegrab.imagegrab': ApiImagegrabImagegrab;
+      'api::invasive.invasive': ApiInvasiveInvasive;
       'api::job.job': ApiJobJob;
       'api::locale.locale': ApiLocaleLocale;
       'api::location.location': ApiLocationLocation;
