@@ -36,12 +36,6 @@
     "closing_time": {
       "type": "time"
     },
-    "locale": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::locale.locale",
-      "inversedBy": "locations"
-    },
     "announcements": {
       "type": "relation",
       "relation": "manyToMany",
@@ -72,6 +66,12 @@
     },
     "offSeasonDetails": {
       "type": "string"
+    },
+    "local": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::locale.locale",
+      "inversedBy": "location"
     }
   }
 }

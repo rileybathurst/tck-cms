@@ -30,17 +30,17 @@
     "stars": {
       "type": "integer"
     },
-    "locale": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::locale.locale",
-      "inversedBy": "testimonials"
-    },
     "teams": {
       "type": "relation",
       "relation": "manyToMany",
       "target": "api::team.team",
       "mappedBy": "testimonials"
+    },
+    "local": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::locale.locale",
+      "inversedBy": "testimonial"
     }
   }
 }

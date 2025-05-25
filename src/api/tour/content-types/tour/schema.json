@@ -79,17 +79,17 @@
     "featured": {
       "type": "boolean"
     },
-    "locale": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::locale.locale",
-      "inversedBy": "tours"
-    },
     "timeframe": {
       "type": "string"
     },
     "experience": {
       "type": "string"
+    },
+    "local": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::locale.locale",
+      "inversedBy": "tour"
     }
   }
 }
