@@ -1155,6 +1155,7 @@ export interface ApiRetailRetail extends Struct.CollectionTypeSchema {
       Schema.Attribute.Required &
       Schema.Attribute.Unique;
     sport: Schema.Attribute.Relation<'manyToOne', 'api::sport.sport'>;
+    tagline: Schema.Attribute.String;
     thickness: Schema.Attribute.Decimal;
     title: Schema.Attribute.String;
     type: Schema.Attribute.Enumeration<['sup', 'kayak']>;
