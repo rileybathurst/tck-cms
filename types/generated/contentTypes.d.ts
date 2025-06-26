@@ -1067,6 +1067,7 @@ export interface ApiRentalRateRentalRate extends Struct.CollectionTypeSchema {
 export interface ApiRentalRental extends Struct.SingleTypeSchema {
   collectionName: 'rentals';
   info: {
+    description: '';
     displayName: 'rental';
     pluralName: 'rentals';
     singularName: 'rental';
@@ -1078,6 +1079,7 @@ export interface ApiRentalRental extends Struct.SingleTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    excerpt: Schema.Attribute.String;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',

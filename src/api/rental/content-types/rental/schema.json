@@ -4,7 +4,8 @@
   "info": {
     "singularName": "rental",
     "pluralName": "rentals",
-    "displayName": "rental"
+    "displayName": "rental",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -12,6 +13,9 @@
   "attributes": {
     "text": {
       "type": "richtext"
+    },
+    "excerpt": {
+      "type": "string"
     }
   }
 }
