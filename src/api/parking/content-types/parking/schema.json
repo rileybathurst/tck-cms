@@ -1,0 +1,23 @@
+{
+  "kind": "singleType",
+  "collectionName": "parkings",
+  "info": {
+    "singularName": "parking",
+    "pluralName": "parkings",
+    "displayName": "parking"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "blocks": {
+      "type": "blocks"
+    },
+    "excerpt": {
+      "type": "string",
+      "minLength": 50,
+      "maxLength": 160
+    }
+  }
+}

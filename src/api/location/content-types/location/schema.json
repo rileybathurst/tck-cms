@@ -27,9 +27,6 @@
     "order": {
       "type": "integer"
     },
-    "address": {
-      "type": "richtext"
-    },
     "opening_time": {
       "type": "time"
     },
@@ -72,6 +69,12 @@
       "relation": "manyToOne",
       "target": "api::locale.locale",
       "inversedBy": "location"
+    },
+    "phone": {
+      "type": "boolean"
+    },
+    "weatherPermitting": {
+      "type": "boolean"
     }
   }
 }

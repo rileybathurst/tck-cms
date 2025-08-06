@@ -10,6 +10,7 @@
   "options": {
     "draftAndPublish": true
   },
+  "pluginOptions": {},
   "attributes": {
     "title": {
       "type": "string"
@@ -39,17 +40,23 @@
       "inversedBy": "announcements"
     },
     "slug": {
-      "type": "string"
+      "type": "string",
+      "required": true,
+      "unique": true,
+      "regex": "^[a-z0-9_-]+$"
     },
     "hero": {
+      "type": "media",
+      "multiple": false,
       "allowedTypes": [
         "images",
         "files",
         "videos",
         "audios"
-      ],
-      "type": "media",
-      "multiple": false
+      ]
+    },
+    "featured": {
+      "type": "boolean"
     }
   }
 }

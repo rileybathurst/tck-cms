@@ -390,6 +390,7 @@ export interface ApiAnnouncementAnnouncement
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    featured: Schema.Attribute.Boolean;
     hero: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     locales: Schema.Attribute.Relation<'manyToMany', 'api::locale.locale'>;
@@ -404,7 +405,9 @@ export interface ApiAnnouncementAnnouncement
     >;
     post: Schema.Attribute.RichText;
     publishedAt: Schema.Attribute.DateTime;
-    slug: Schema.Attribute.String;
+    slug: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.Unique;
     sports: Schema.Attribute.Relation<'manyToMany', 'api::sport.sport'>;
     title: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
@@ -567,6 +570,32 @@ export interface ApiDemoDemo extends Struct.SingleTypeSchema {
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
     text: Schema.Attribute.RichText;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiErrorError extends Struct.SingleTypeSchema {
+  collectionName: 'errors';
+  info: {
+    displayName: 'error';
+    pluralName: 'errors';
+    singularName: 'error';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    excerpt: Schema.Attribute.String;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::error.error'> &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    return: Schema.Attribute.Blocks;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -832,7 +861,6 @@ export interface ApiLocationLocation extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
-    address: Schema.Attribute.RichText;
     addressLocality: Schema.Attribute.String;
     addressRegion: Schema.Attribute.String;
     announcements: Schema.Attribute.Relation<
@@ -858,6 +886,7 @@ export interface ApiLocationLocation extends Struct.CollectionTypeSchema {
     opening_time: Schema.Attribute.Time;
     order: Schema.Attribute.Integer;
     paymentAccepted: Schema.Attribute.Text;
+    phone: Schema.Attribute.Boolean;
     postalCode: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
     schemaType: Schema.Attribute.String;
@@ -866,6 +895,7 @@ export interface ApiLocationLocation extends Struct.CollectionTypeSchema {
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    weatherPermitting: Schema.Attribute.Boolean;
   };
 }
 
@@ -933,6 +963,39 @@ export interface ApiPaddleInfoPaddleInfo extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiParkingParking extends Struct.SingleTypeSchema {
+  collectionName: 'parkings';
+  info: {
+    displayName: 'parking';
+    pluralName: 'parkings';
+    singularName: 'parking';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    blocks: Schema.Attribute.Blocks;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    excerpt: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 160;
+        minLength: 50;
+      }>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::parking.parking'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiPolicyPolicy extends Struct.CollectionTypeSchema {
   collectionName: 'policies';
   info: {
@@ -992,43 +1055,6 @@ export interface ApiProtectProtect extends Struct.SingleTypeSchema {
   };
 }
 
-export interface ApiRentalAddonRentalAddon extends Struct.CollectionTypeSchema {
-  collectionName: 'rental_addons';
-  info: {
-    description: '';
-    displayName: 'rental addon';
-    pluralName: 'rental-addons';
-    singularName: 'rental-addon';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    attribute: Schema.Attribute.Relation<
-      'oneToOne',
-      'api::attribute.attribute'
-    >;
-    createdAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    double: Schema.Attribute.Integer;
-    link: Schema.Attribute.String;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::rental-addon.rental-addon'
-    > &
-      Schema.Attribute.Private;
-    name: Schema.Attribute.String;
-    publishedAt: Schema.Attribute.DateTime;
-    single: Schema.Attribute.Integer;
-    sup: Schema.Attribute.Integer;
-    updatedAt: Schema.Attribute.DateTime;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-  };
-}
-
 export interface ApiRentalRateRentalRate extends Struct.CollectionTypeSchema {
   collectionName: 'rental_rates';
   info: {
@@ -1044,6 +1070,7 @@ export interface ApiRentalRateRentalRate extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    excerpt: Schema.Attribute.String;
     favorite: Schema.Attribute.Boolean;
     fullDay: Schema.Attribute.Integer;
     item: Schema.Attribute.String;
@@ -1055,6 +1082,7 @@ export interface ApiRentalRateRentalRate extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     oneHour: Schema.Attribute.Integer;
     order: Schema.Attribute.Integer;
+    pedalAdd: Schema.Attribute.Integer;
     publishedAt: Schema.Attribute.DateTime;
     retail: Schema.Attribute.Relation<'oneToOne', 'api::retail.retail'>;
     threeHour: Schema.Attribute.Integer;
@@ -1184,6 +1212,10 @@ export interface ApiRiverRiver extends Struct.SingleTypeSchema {
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     description: Schema.Attribute.RichText;
+    equipment: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios',
+      true
+    >;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::river.river'> &
       Schema.Attribute.Private;
@@ -1377,6 +1409,9 @@ export interface ApiTourTour extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
+    compositionImage: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1969,6 +2004,7 @@ declare module '@strapi/strapi' {
       'api::brand.brand': ApiBrandBrand;
       'api::condition.condition': ApiConditionCondition;
       'api::demo.demo': ApiDemoDemo;
+      'api::error.error': ApiErrorError;
       'api::event.event': ApiEventEvent;
       'api::experience.experience': ApiExperienceExperience;
       'api::faq.faq': ApiFaqFaq;
@@ -1979,9 +2015,9 @@ declare module '@strapi/strapi' {
       'api::location.location': ApiLocationLocation;
       'api::moonlight-tour-date-time.moonlight-tour-date-time': ApiMoonlightTourDateTimeMoonlightTourDateTime;
       'api::paddle-info.paddle-info': ApiPaddleInfoPaddleInfo;
+      'api::parking.parking': ApiParkingParking;
       'api::policy.policy': ApiPolicyPolicy;
       'api::protect.protect': ApiProtectProtect;
-      'api::rental-addon.rental-addon': ApiRentalAddonRentalAddon;
       'api::rental-rate.rental-rate': ApiRentalRateRentalRate;
       'api::rental.rental': ApiRentalRental;
       'api::retail.retail': ApiRetailRetail;

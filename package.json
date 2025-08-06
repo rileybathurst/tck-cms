@@ -1,7 +1,7 @@
 {
   "name": "tck-cms",
   "private": true,
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Tahoe City Kayak Strapi CMS",
   "scripts": {
     "develop": "strapi develop",
@@ -10,17 +10,15 @@
     "strapi": "strapi"
   },
   "dependencies": {
-    "@strapi/plugin-users-permissions": "5.13.0",
-    "@strapi/strapi": "5.13.0",
-    "better-sqlite3": "11.3.0",
-    "react": "^18.0.0",
-    "react-dom": "^18.0.0",
-    "react-router-dom": "^6.0.0",
-    "styled-components": "^6.0.0"
+    "@strapi/plugin-users-permissions": "5.16.1",
+    "@strapi/strapi": "5.16.1",
+    "better-sqlite3": "12.1.1",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.30.0",
+    "styled-components": "^6.1.19"
   },
-  "author": {
-    "name": "A Strapi developer"
-  },
+  "author": "Riley Bathurst <riley@rileybathurst.com> (https://rileybathurst.com)",
   "strapi": {
     "uuid": "9175ad9a-4f2a-4e05-bd6b-1340227e07ae"
   },

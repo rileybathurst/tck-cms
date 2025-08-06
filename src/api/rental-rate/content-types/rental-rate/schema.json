@@ -35,6 +35,12 @@
     },
     "order": {
       "type": "integer"
+    },
+    "pedalAdd": {
+      "type": "integer"
+    },
+    "excerpt": {
+      "type": "string"
     }
   }
 }

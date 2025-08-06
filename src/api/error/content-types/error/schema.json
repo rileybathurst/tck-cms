@@ -1,0 +1,21 @@
+{
+  "kind": "singleType",
+  "collectionName": "errors",
+  "info": {
+    "singularName": "error",
+    "pluralName": "errors",
+    "displayName": "error"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "excerpt": {
+      "type": "string"
+    },
+    "return": {
+      "type": "blocks"
+    }
+  }
+}

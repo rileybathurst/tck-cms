@@ -62,8 +62,8 @@
     },
     "excerpt": {
       "type": "string",
-      "maxLength": 160,
-      "minLength": 120
+      "minLength": 120,
+      "maxLength": 160
     },
     "ogimage": {
       "type": "media",
@@ -90,6 +90,16 @@
       "relation": "manyToOne",
       "target": "api::locale.locale",
       "inversedBy": "tour"
+    },
+    "compositionImage": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
     }
   }
 }
