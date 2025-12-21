@@ -41,6 +41,12 @@
       "relation": "manyToOne",
       "target": "api::locale.locale",
       "inversedBy": "testimonial"
+    },
+    "branch": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::branch.branch",
+      "inversedBy": "testimonials"
     }
   }
 }

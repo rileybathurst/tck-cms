@@ -57,6 +57,12 @@
     },
     "featured": {
       "type": "boolean"
+    },
+    "branches": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::branch.branch",
+      "mappedBy": "announcements"
     }
   }
 }

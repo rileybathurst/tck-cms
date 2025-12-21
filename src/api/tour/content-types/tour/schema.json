@@ -100,6 +100,12 @@
         "videos",
         "audios"
       ]
+    },
+    "branch": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::branch.branch",
+      "inversedBy": "tours"
     }
   }
 }

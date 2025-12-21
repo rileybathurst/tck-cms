@@ -75,6 +75,12 @@
     },
     "weatherPermitting": {
       "type": "boolean"
+    },
+    "branch": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::branch.branch",
+      "inversedBy": "locations"
     }
   }
 }

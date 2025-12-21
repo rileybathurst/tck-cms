@@ -10,11 +10,18 @@
   "options": {
     "draftAndPublish": true
   },
+  "pluginOptions": {},
   "attributes": {
     "text": {
       "type": "richtext"
     },
     "excerpt": {
+      "type": "string"
+    },
+    "south_tahoe": {
+      "type": "richtext"
+    },
+    "south_tahoe_excerpt": {
       "type": "string"
     }
   }

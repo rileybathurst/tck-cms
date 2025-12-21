@@ -10,6 +10,7 @@
   "options": {
     "draftAndPublish": true
   },
+  "pluginOptions": {},
   "attributes": {
     "title": {
       "type": "string"
@@ -29,8 +30,14 @@
     },
     "tags": {
       "type": "text",
-      "regex": "^- .*(?:\\n- .*|(?!\\n-).)*$",
-      "default": "- "
+      "default": "- ",
+      "regex": "^- .*(?:\\n- .*|(?!\\n-).)*$"
+    },
+    "branches": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::branch.branch",
+      "mappedBy": "blog"
     }
   }
 }

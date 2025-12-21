@@ -386,6 +386,7 @@ export interface ApiAnnouncementAnnouncement
     draftAndPublish: true;
   };
   attributes: {
+    branches: Schema.Attribute.Relation<'manyToMany', 'api::branch.branch'>;
     calendar: Schema.Attribute.DateTime;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -460,6 +461,7 @@ export interface ApiBlogBlog extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
+    branches: Schema.Attribute.Relation<'oneToMany', 'api::branch.branch'>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -475,6 +477,84 @@ export interface ApiBlogBlog extends Struct.CollectionTypeSchema {
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+  };
+}
+
+export interface ApiBranchBranch extends Struct.CollectionTypeSchema {
+  collectionName: 'branches';
+  info: {
+    displayName: 'branch';
+    pluralName: 'branches';
+    singularName: 'branch';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    about: Schema.Attribute.RichText;
+    announcements: Schema.Attribute.Relation<
+      'manyToMany',
+      'api::announcement.announcement'
+    >;
+    blog: Schema.Attribute.Relation<'manyToOne', 'api::blog.blog'>;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    email: Schema.Attribute.String;
+    excerpt: Schema.Attribute.String;
+    facebook: Schema.Attribute.String;
+    geo_radius: Schema.Attribute.Integer;
+    instagram: Schema.Attribute.String;
+    job_email: Schema.Attribute.String;
+    jobs: Schema.Attribute.Relation<'manyToMany', 'api::job.job'>;
+    latitude: Schema.Attribute.Decimal;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::branch.branch'
+    > &
+      Schema.Attribute.Private;
+    locations: Schema.Attribute.Relation<'oneToMany', 'api::location.location'>;
+    longitude: Schema.Attribute.Decimal;
+    name: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.Unique;
+    number_of_employees: Schema.Attribute.String;
+    og_image: Schema.Attribute.String;
+    og_image_description: Schema.Attribute.String;
+    payment_accepted: Schema.Attribute.String;
+    peek_base: Schema.Attribute.String;
+    peek_double: Schema.Attribute.String;
+    peek_membership: Schema.Attribute.String;
+    peek_paddleboard: Schema.Attribute.String;
+    peek_rentals: Schema.Attribute.String;
+    peek_single: Schema.Attribute.String;
+    peek_six_pack: Schema.Attribute.String;
+    peek_tours: Schema.Attribute.String;
+    phone: Schema.Attribute.Integer;
+    price_range: Schema.Attribute.String;
+    publishedAt: Schema.Attribute.DateTime;
+    rental: Schema.Attribute.RichText;
+    rental_excerpt: Schema.Attribute.String;
+    season_end: Schema.Attribute.Date;
+    season_start: Schema.Attribute.Date;
+    slogan: Schema.Attribute.String;
+    slug: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.Unique;
+    teams: Schema.Attribute.Relation<'manyToMany', 'api::team.team'>;
+    testimonials: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::testimonial.testimonial'
+    >;
+    theme_color: Schema.Attribute.String;
+    topbar: Schema.Attribute.RichText;
+    tours: Schema.Attribute.Relation<'oneToMany', 'api::tour.tour'>;
+    tripadvisor: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    url: Schema.Attribute.String;
   };
 }
 
@@ -596,36 +676,6 @@ export interface ApiErrorError extends Struct.SingleTypeSchema {
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
     return: Schema.Attribute.Blocks;
-    updatedAt: Schema.Attribute.DateTime;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-  };
-}
-
-export interface ApiEventEvent extends Struct.CollectionTypeSchema {
-  collectionName: 'events';
-  info: {
-    displayName: 'event';
-    pluralName: 'events';
-    singularName: 'event';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    createdAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    date: Schema.Attribute.DateTime;
-    finish: Schema.Attribute.DateTime;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<'oneToMany', 'api::event.event'> &
-      Schema.Attribute.Private;
-    name: Schema.Attribute.String;
-    publishedAt: Schema.Attribute.DateTime;
-    start: Schema.Attribute.DateTime;
-    topbar: Schema.Attribute.String;
-    tour: Schema.Attribute.Relation<'oneToOne', 'api::tour.tour'>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -760,6 +810,7 @@ export interface ApiJobJob extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
+    branches: Schema.Attribute.Relation<'manyToMany', 'api::branch.branch'>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -867,6 +918,7 @@ export interface ApiLocationLocation extends Struct.CollectionTypeSchema {
       'manyToMany',
       'api::announcement.announcement'
     >;
+    branch: Schema.Attribute.Relation<'manyToOne', 'api::branch.branch'>;
     closing_time: Schema.Attribute.Time;
     commonName: Schema.Attribute.String;
     createdAt: Schema.Attribute.DateTime;
@@ -896,6 +948,36 @@ export interface ApiLocationLocation extends Struct.CollectionTypeSchema {
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     weatherPermitting: Schema.Attribute.Boolean;
+  };
+}
+
+export interface ApiMembershipMembership extends Struct.SingleTypeSchema {
+  collectionName: 'memberships';
+  info: {
+    displayName: 'membership';
+    pluralName: 'memberships';
+    singularName: 'membership';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    excerpt: Schema.Attribute.String;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::membership.membership'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    six: Schema.Attribute.Text;
+    title: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
   };
 }
 
@@ -1115,6 +1197,8 @@ export interface ApiRentalRental extends Struct.SingleTypeSchema {
     > &
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
+    south_tahoe: Schema.Attribute.RichText;
+    south_tahoe_excerpt: Schema.Attribute.String;
     text: Schema.Attribute.RichText;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -1336,6 +1420,7 @@ export interface ApiTeamTeam extends Struct.CollectionTypeSchema {
   };
   attributes: {
     bio: Schema.Attribute.RichText;
+    branches: Schema.Attribute.Relation<'manyToMany', 'api::branch.branch'>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1373,6 +1458,7 @@ export interface ApiTestimonialTestimonial extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
+    branch: Schema.Attribute.Relation<'manyToOne', 'api::branch.branch'>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1409,6 +1495,7 @@ export interface ApiTourTour extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
+    branch: Schema.Attribute.Relation<'manyToOne', 'api::branch.branch'>;
     compositionImage: Schema.Attribute.Media<
       'images' | 'files' | 'videos' | 'audios'
     >;
@@ -2001,11 +2088,11 @@ declare module '@strapi/strapi' {
       'api::announcement.announcement': ApiAnnouncementAnnouncement;
       'api::attribute.attribute': ApiAttributeAttribute;
       'api::blog.blog': ApiBlogBlog;
+      'api::branch.branch': ApiBranchBranch;
       'api::brand.brand': ApiBrandBrand;
       'api::condition.condition': ApiConditionCondition;
       'api::demo.demo': ApiDemoDemo;
       'api::error.error': ApiErrorError;
-      'api::event.event': ApiEventEvent;
       'api::experience.experience': ApiExperienceExperience;
       'api::faq.faq': ApiFaqFaq;
       'api::imagegrab.imagegrab': ApiImagegrabImagegrab;
@@ -2013,6 +2100,7 @@ declare module '@strapi/strapi' {
       'api::job.job': ApiJobJob;
       'api::locale.locale': ApiLocaleLocale;
       'api::location.location': ApiLocationLocation;
+      'api::membership.membership': ApiMembershipMembership;
       'api::moonlight-tour-date-time.moonlight-tour-date-time': ApiMoonlightTourDateTimeMoonlightTourDateTime;
       'api::paddle-info.paddle-info': ApiPaddleInfoPaddleInfo;
       'api::parking.parking': ApiParkingParking;
