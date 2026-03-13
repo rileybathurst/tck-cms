@@ -508,6 +508,7 @@ export interface ApiBranchBranch extends Struct.CollectionTypeSchema {
     job_email: Schema.Attribute.String;
     jobs: Schema.Attribute.Relation<'manyToMany', 'api::job.job'>;
     latitude: Schema.Attribute.Decimal;
+    lead: Schema.Attribute.RichText;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -536,6 +537,10 @@ export interface ApiBranchBranch extends Struct.CollectionTypeSchema {
     publishedAt: Schema.Attribute.DateTime;
     rental: Schema.Attribute.RichText;
     rental_excerpt: Schema.Attribute.String;
+    rental_rate: Schema.Attribute.Relation<
+      'manyToOne',
+      'api::rental-rate.rental-rate'
+    >;
     season_end: Schema.Attribute.Date;
     season_start: Schema.Attribute.Date;
     slogan: Schema.Attribute.String;
@@ -938,10 +943,10 @@ export interface ApiLocationLocation extends Struct.CollectionTypeSchema {
     opening_time: Schema.Attribute.Time;
     order: Schema.Attribute.Integer;
     paymentAccepted: Schema.Attribute.Text;
-    phone: Schema.Attribute.Boolean;
     postalCode: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
     schemaType: Schema.Attribute.String;
+    showThePhone: Schema.Attribute.Boolean;
     streetAddress: Schema.Attribute.String;
     svg: Schema.Attribute.Text;
     updatedAt: Schema.Attribute.DateTime;
@@ -1149,6 +1154,7 @@ export interface ApiRentalRateRentalRate extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
+    branches: Schema.Attribute.Relation<'oneToMany', 'api::branch.branch'>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1300,6 +1306,7 @@ export interface ApiRiverRiver extends Struct.SingleTypeSchema {
       'images' | 'files' | 'videos' | 'audios',
       true
     >;
+    excerpt: Schema.Attribute.String;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::river.river'> &
       Schema.Attribute.Private;

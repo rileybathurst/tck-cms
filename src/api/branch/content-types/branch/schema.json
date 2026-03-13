@@ -1,0 +1,173 @@
+{
+  "kind": "collectionType",
+  "collectionName": "branches",
+  "info": {
+    "singularName": "branch",
+    "pluralName": "branches",
+    "displayName": "branch"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "slug": {
+      "type": "string",
+      "required": true,
+      "unique": true,
+      "regex": "^[a-z0-9_-]+$"
+    },
+    "season_start": {
+      "type": "date"
+    },
+    "season_end": {
+      "type": "date"
+    },
+    "blog": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::blog.blog",
+      "inversedBy": "branches"
+    },
+    "phone": {
+      "type": "integer"
+    },
+    "email": {
+      "type": "string"
+    },
+    "jobs": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::job.job",
+      "inversedBy": "branches"
+    },
+    "url": {
+      "type": "string"
+    },
+    "announcements": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::announcement.announcement",
+      "inversedBy": "branches"
+    },
+    "peek_base": {
+      "type": "string"
+    },
+    "peek_tours": {
+      "type": "string"
+    },
+    "peek_rentals": {
+      "type": "string"
+    },
+    "peek_single": {
+      "type": "string"
+    },
+    "peek_double": {
+      "type": "string"
+    },
+    "peek_paddleboard": {
+      "type": "string"
+    },
+    "peek_membership": {
+      "type": "string"
+    },
+    "og_image": {
+      "type": "string"
+    },
+    "latitude": {
+      "type": "decimal"
+    },
+    "longitude": {
+      "type": "decimal"
+    },
+    "geo_radius": {
+      "type": "integer"
+    },
+    "theme_color": {
+      "type": "string"
+    },
+    "number_of_employees": {
+      "type": "string"
+    },
+    "og_image_description": {
+      "type": "string"
+    },
+    "instagram": {
+      "type": "string"
+    },
+    "facebook": {
+      "type": "string"
+    },
+    "tripadvisor": {
+      "type": "string"
+    },
+    "excerpt": {
+      "type": "string"
+    },
+    "price_range": {
+      "type": "string"
+    },
+    "payment_accepted": {
+      "type": "string"
+    },
+    "slogan": {
+      "type": "string"
+    },
+    "job_email": {
+      "type": "string"
+    },
+    "peek_six_pack": {
+      "type": "string"
+    },
+    "tours": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::tour.tour",
+      "mappedBy": "branch"
+    },
+    "teams": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::team.team",
+      "inversedBy": "branches"
+    },
+    "locations": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::location.location",
+      "mappedBy": "branch"
+    },
+    "testimonials": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::testimonial.testimonial",
+      "mappedBy": "branch"
+    },
+    "about": {
+      "type": "richtext"
+    },
+    "topbar": {
+      "type": "richtext"
+    },
+    "rental": {
+      "type": "richtext"
+    },
+    "rental_excerpt": {
+      "type": "string"
+    },
+    "rental_rate": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::rental-rate.rental-rate",
+      "inversedBy": "branches"
+    },
+    "lead": {
+      "type": "richtext"
+    }
+  }
+}

@@ -70,7 +70,7 @@
       "target": "api::locale.locale",
       "inversedBy": "location"
     },
-    "phone": {
+    "showThePhone": {
       "type": "boolean"
     },
     "weatherPermitting": {

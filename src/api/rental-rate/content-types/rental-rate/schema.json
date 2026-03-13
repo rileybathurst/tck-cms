@@ -41,6 +41,12 @@
     },
     "excerpt": {
       "type": "string"
+    },
+    "branches": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::branch.branch",
+      "mappedBy": "rental_rate"
     }
   }
 }
