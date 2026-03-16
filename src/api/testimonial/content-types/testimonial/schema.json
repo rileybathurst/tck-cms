@@ -36,12 +36,6 @@
       "target": "api::team.team",
       "mappedBy": "testimonials"
     },
-    "local": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::locale.locale",
-      "inversedBy": "testimonial"
-    },
     "branch": {
       "type": "relation",
       "relation": "manyToOne",

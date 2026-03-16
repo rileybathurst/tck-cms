@@ -1,9 +1,9 @@
 'use strict';
 
 /**
- * locale service
+ * group service
  */
 
 const { createCoreService } = require('@strapi/strapi').factories;
 
-module.exports = createCoreService('api::locale.locale');
+module.exports = createCoreService('api::group.group');

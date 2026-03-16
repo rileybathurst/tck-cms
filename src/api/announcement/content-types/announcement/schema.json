@@ -18,12 +18,6 @@
     "post": {
       "type": "richtext"
     },
-    "locales": {
-      "type": "relation",
-      "relation": "manyToMany",
-      "target": "api::locale.locale",
-      "inversedBy": "announcements"
-    },
     "locations": {
       "type": "relation",
       "relation": "manyToMany",

@@ -1,9 +1,9 @@
 'use strict';
 
 /**
- * locale controller
+ * group controller
  */
 
 const { createCoreController } = require('@strapi/strapi').factories;
 
-module.exports = createCoreController('api::locale.locale');
+module.exports = createCoreController('api::group.group');

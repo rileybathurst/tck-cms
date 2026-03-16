@@ -22,12 +22,6 @@
     "markdown": {
       "type": "richtext"
     },
-    "locales": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::locale.locale",
-      "mappedBy": "blog"
-    },
     "tags": {
       "type": "text",
       "default": "- ",

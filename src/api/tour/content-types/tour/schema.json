@@ -76,20 +76,11 @@
         "audios"
       ]
     },
-    "featured": {
-      "type": "boolean"
-    },
     "timeframe": {
       "type": "string"
     },
     "experience": {
       "type": "string"
-    },
-    "local": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::locale.locale",
-      "inversedBy": "tour"
     },
     "compositionImage": {
       "type": "media",
@@ -106,6 +97,9 @@
       "relation": "manyToOne",
       "target": "api::branch.branch",
       "inversedBy": "tours"
+    },
+    "order": {
+      "type": "integer"
     }
   }
 }

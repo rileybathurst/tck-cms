@@ -64,12 +64,6 @@
     "offSeasonDetails": {
       "type": "string"
     },
-    "local": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::locale.locale",
-      "inversedBy": "location"
-    },
     "showThePhone": {
       "type": "boolean"
     },

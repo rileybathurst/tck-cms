@@ -394,7 +394,6 @@ export interface ApiAnnouncementAnnouncement
     featured: Schema.Attribute.Boolean;
     hero: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
-    locales: Schema.Attribute.Relation<'manyToMany', 'api::locale.locale'>;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
       'api::announcement.announcement'
@@ -466,7 +465,6 @@ export interface ApiBlogBlog extends Struct.CollectionTypeSchema {
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
-    locales: Schema.Attribute.Relation<'oneToMany', 'api::locale.locale'>;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::blog.blog'> &
       Schema.Attribute.Private;
     markdown: Schema.Attribute.RichText;
@@ -636,6 +634,34 @@ export interface ApiConditionCondition extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiDeliveryDelivery extends Struct.SingleTypeSchema {
+  collectionName: 'deliveries';
+  info: {
+    displayName: 'delivery';
+    pluralName: 'deliveries';
+    singularName: 'delivery';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::delivery.delivery'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    text: Schema.Attribute.RichText;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiDemoDemo extends Struct.SingleTypeSchema {
   collectionName: 'demos';
   info: {
@@ -745,6 +771,31 @@ export interface ApiFaqFaq extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiGroupGroup extends Struct.SingleTypeSchema {
+  collectionName: 'groups';
+  info: {
+    displayName: 'group';
+    pluralName: 'groups';
+    singularName: 'group';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::group.group'> &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    text: Schema.Attribute.RichText;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiImagegrabImagegrab extends Struct.CollectionTypeSchema {
   collectionName: 'imagegrabs';
   info: {
@@ -821,7 +872,6 @@ export interface ApiJobJob extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     description: Schema.Attribute.RichText;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
-    locales: Schema.Attribute.Relation<'manyToMany', 'api::locale.locale'>;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::job.job'> &
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
@@ -829,79 +879,6 @@ export interface ApiJobJob extends Struct.CollectionTypeSchema {
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-  };
-}
-
-export interface ApiLocaleLocale extends Struct.CollectionTypeSchema {
-  collectionName: 'locales';
-  info: {
-    description: '';
-    displayName: 'locale';
-    pluralName: 'locales';
-    singularName: 'locale';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    about: Schema.Attribute.RichText;
-    announcements: Schema.Attribute.Relation<
-      'manyToMany',
-      'api::announcement.announcement'
-    >;
-    blog: Schema.Attribute.Relation<'manyToOne', 'api::blog.blog'>;
-    createdAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    email: Schema.Attribute.String;
-    excerpt: Schema.Attribute.String;
-    facebook: Schema.Attribute.String;
-    geoRadius: Schema.Attribute.Integer;
-    instagram: Schema.Attribute.String;
-    jobEmail: Schema.Attribute.String;
-    jobs: Schema.Attribute.Relation<'manyToMany', 'api::job.job'>;
-    latitude: Schema.Attribute.Decimal;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::locale.locale'
-    > &
-      Schema.Attribute.Private;
-    location: Schema.Attribute.Relation<'oneToMany', 'api::location.location'>;
-    longitude: Schema.Attribute.Decimal;
-    name: Schema.Attribute.String;
-    numberOfEmployees: Schema.Attribute.String;
-    ogImage: Schema.Attribute.String;
-    ogImageDescription: Schema.Attribute.String;
-    paymentAccepted: Schema.Attribute.Text;
-    peek_base: Schema.Attribute.String;
-    peek_double: Schema.Attribute.String;
-    peek_paddleboard: Schema.Attribute.String;
-    peek_rentals: Schema.Attribute.String;
-    peek_single: Schema.Attribute.String;
-    peek_tours: Schema.Attribute.String;
-    phone: Schema.Attribute.BigInteger;
-    priceRange: Schema.Attribute.String;
-    publishedAt: Schema.Attribute.DateTime;
-    RainCheck: Schema.Attribute.DateTime;
-    RainCheckReason: Schema.Attribute.String;
-    season_end: Schema.Attribute.Date;
-    season_start: Schema.Attribute.Date;
-    slogan: Schema.Attribute.String;
-    slug: Schema.Attribute.String & Schema.Attribute.Unique;
-    teams: Schema.Attribute.Relation<'manyToMany', 'api::team.team'>;
-    testimonial: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::testimonial.testimonial'
-    >;
-    themeColor: Schema.Attribute.String;
-    topbar: Schema.Attribute.RichText;
-    tour: Schema.Attribute.Relation<'oneToMany', 'api::tour.tour'>;
-    tripadvisor: Schema.Attribute.String;
-    updatedAt: Schema.Attribute.DateTime;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    url: Schema.Attribute.String;
   };
 }
 
@@ -931,7 +908,6 @@ export interface ApiLocationLocation extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     description: Schema.Attribute.RichText;
     link: Schema.Attribute.Text;
-    local: Schema.Attribute.Relation<'manyToOne', 'api::locale.locale'>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -1431,7 +1407,6 @@ export interface ApiTeamTeam extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    local: Schema.Attribute.Relation<'manyToMany', 'api::locale.locale'>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::team.team'> &
       Schema.Attribute.Private;
@@ -1470,7 +1445,6 @@ export interface ApiTestimonialTestimonial extends Struct.CollectionTypeSchema {
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     customer: Schema.Attribute.String;
-    local: Schema.Attribute.Relation<'manyToOne', 'api::locale.locale'>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -1516,19 +1490,18 @@ export interface ApiTourTour extends Struct.CollectionTypeSchema {
         minLength: 120;
       }>;
     experience: Schema.Attribute.String;
-    featured: Schema.Attribute.Boolean;
     finish: Schema.Attribute.Time;
     fitness: Schema.Attribute.Enumeration<
       ['easy peasy', 'easy', 'easy / moderate', 'moderate']
     >;
     information: Schema.Attribute.RichText;
-    local: Schema.Attribute.Relation<'manyToOne', 'api::locale.locale'>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::tour.tour'> &
       Schema.Attribute.Private;
     minimum: Schema.Attribute.Integer;
     name: Schema.Attribute.String & Schema.Attribute.Required;
     ogimage: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    order: Schema.Attribute.Integer;
     peek: Schema.Attribute.String;
     price: Schema.Attribute.Integer;
     publishedAt: Schema.Attribute.DateTime;
@@ -2098,14 +2071,15 @@ declare module '@strapi/strapi' {
       'api::branch.branch': ApiBranchBranch;
       'api::brand.brand': ApiBrandBrand;
       'api::condition.condition': ApiConditionCondition;
+      'api::delivery.delivery': ApiDeliveryDelivery;
       'api::demo.demo': ApiDemoDemo;
       'api::error.error': ApiErrorError;
       'api::experience.experience': ApiExperienceExperience;
       'api::faq.faq': ApiFaqFaq;
+      'api::group.group': ApiGroupGroup;
       'api::imagegrab.imagegrab': ApiImagegrabImagegrab;
       'api::invasive.invasive': ApiInvasiveInvasive;
       'api::job.job': ApiJobJob;
-      'api::locale.locale': ApiLocaleLocale;
       'api::location.location': ApiLocationLocation;
       'api::membership.membership': ApiMembershipMembership;
       'api::moonlight-tour-date-time.moonlight-tour-date-time': ApiMoonlightTourDateTimeMoonlightTourDateTime;
