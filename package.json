@@ -1,7 +1,7 @@
 {
   "name": "tck-cms",
   "private": true,
-  "version": "1.3.0",
+  "version": "1.4.0",
   "description": "Tahoe City Kayak Strapi CMS",
   "scripts": {
     "develop": "strapi develop",
