@@ -17,8 +17,8 @@
     },
     "slug": {
       "type": "string",
-      "unique": true,
       "required": true,
+      "unique": true,
       "regex": "^[a-z0-9\\-]*$"
     },
     "tagline": {
@@ -32,12 +32,6 @@
       "relation": "oneToMany",
       "target": "api::retail.retail",
       "mappedBy": "brand"
-    },
-    "sports": {
-      "type": "relation",
-      "relation": "manyToMany",
-      "target": "api::sport.sport",
-      "mappedBy": "brands"
     }
   }
 }

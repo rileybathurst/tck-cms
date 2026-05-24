@@ -75,6 +75,16 @@
       "relation": "manyToOne",
       "target": "api::branch.branch",
       "inversedBy": "locations"
+    },
+    "hero": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
     }
   }
 }

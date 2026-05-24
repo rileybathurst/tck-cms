@@ -448,36 +448,6 @@ export interface ApiAttributeAttribute extends Struct.CollectionTypeSchema {
   };
 }
 
-export interface ApiBlogBlog extends Struct.CollectionTypeSchema {
-  collectionName: 'blogs';
-  info: {
-    description: '';
-    displayName: 'blog';
-    pluralName: 'blogs';
-    singularName: 'blog';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    branches: Schema.Attribute.Relation<'oneToMany', 'api::branch.branch'>;
-    createdAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<'oneToMany', 'api::blog.blog'> &
-      Schema.Attribute.Private;
-    markdown: Schema.Attribute.RichText;
-    publishedAt: Schema.Attribute.DateTime;
-    slug: Schema.Attribute.String & Schema.Attribute.Unique;
-    tags: Schema.Attribute.Text & Schema.Attribute.DefaultTo<'- '>;
-    title: Schema.Attribute.String;
-    updatedAt: Schema.Attribute.DateTime;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-  };
-}
-
 export interface ApiBranchBranch extends Struct.CollectionTypeSchema {
   collectionName: 'branches';
   info: {
@@ -494,7 +464,6 @@ export interface ApiBranchBranch extends Struct.CollectionTypeSchema {
       'manyToMany',
       'api::announcement.announcement'
     >;
-    blog: Schema.Attribute.Relation<'manyToOne', 'api::blog.blog'>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -502,6 +471,7 @@ export interface ApiBranchBranch extends Struct.CollectionTypeSchema {
     excerpt: Schema.Attribute.String;
     facebook: Schema.Attribute.String;
     geo_radius: Schema.Attribute.Integer;
+    hero: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     instagram: Schema.Attribute.String;
     job_email: Schema.Attribute.String;
     jobs: Schema.Attribute.Relation<'manyToMany', 'api::job.job'>;
@@ -514,6 +484,10 @@ export interface ApiBranchBranch extends Struct.CollectionTypeSchema {
     > &
       Schema.Attribute.Private;
     locations: Schema.Attribute.Relation<'oneToMany', 'api::location.location'>;
+    logoImage: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    logoImageNegative: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
     longitude: Schema.Attribute.Decimal;
     name: Schema.Attribute.String &
       Schema.Attribute.Required &
@@ -521,6 +495,8 @@ export interface ApiBranchBranch extends Struct.CollectionTypeSchema {
     number_of_employees: Schema.Attribute.String;
     og_image: Schema.Attribute.String;
     og_image_description: Schema.Attribute.String;
+    parking: Schema.Attribute.String;
+    parkings: Schema.Attribute.Relation<'oneToMany', 'api::parking.parking'>;
     payment_accepted: Schema.Attribute.String;
     peek_base: Schema.Attribute.String;
     peek_double: Schema.Attribute.String;
@@ -585,7 +561,6 @@ export interface ApiBrandBrand extends Struct.CollectionTypeSchema {
     slug: Schema.Attribute.String &
       Schema.Attribute.Required &
       Schema.Attribute.Unique;
-    sports: Schema.Attribute.Relation<'manyToMany', 'api::sport.sport'>;
     svg: Schema.Attribute.Text;
     tagline: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
@@ -701,12 +676,12 @@ export interface ApiErrorError extends Struct.SingleTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    excerpt: Schema.Attribute.String;
+    description: Schema.Attribute.RichText;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::error.error'> &
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
-    return: Schema.Attribute.Blocks;
+    title: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -796,35 +771,6 @@ export interface ApiGroupGroup extends Struct.SingleTypeSchema {
   };
 }
 
-export interface ApiImagegrabImagegrab extends Struct.CollectionTypeSchema {
-  collectionName: 'imagegrabs';
-  info: {
-    displayName: 'imagegrab';
-    pluralName: 'imagegrabs';
-    singularName: 'imagegrab';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    createdAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::imagegrab.imagegrab'
-    > &
-      Schema.Attribute.Private;
-    publishedAt: Schema.Attribute.DateTime;
-    title: Schema.Attribute.String;
-    updatedAt: Schema.Attribute.DateTime;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-  };
-}
-
 export interface ApiInvasiveInvasive extends Struct.SingleTypeSchema {
   collectionName: 'invasives';
   info: {
@@ -907,6 +853,7 @@ export interface ApiLocationLocation extends Struct.CollectionTypeSchema {
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     description: Schema.Attribute.RichText;
+    hero: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     link: Schema.Attribute.Text;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
@@ -947,6 +894,7 @@ export interface ApiMembershipMembership extends Struct.SingleTypeSchema {
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     excerpt: Schema.Attribute.String;
+    hero: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -1026,7 +974,7 @@ export interface ApiPaddleInfoPaddleInfo extends Struct.CollectionTypeSchema {
   };
 }
 
-export interface ApiParkingParking extends Struct.SingleTypeSchema {
+export interface ApiParkingParking extends Struct.CollectionTypeSchema {
   collectionName: 'parkings';
   info: {
     displayName: 'parking';
@@ -1037,25 +985,24 @@ export interface ApiParkingParking extends Struct.SingleTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
-    blocks: Schema.Attribute.Blocks;
+    branch: Schema.Attribute.Relation<'manyToOne', 'api::branch.branch'>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    excerpt: Schema.Attribute.String &
-      Schema.Attribute.SetMinMaxLength<{
-        maxLength: 160;
-        minLength: 50;
-      }>;
+    description: Schema.Attribute.Text;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
       'api::parking.parking'
     > &
       Schema.Attribute.Private;
+    order: Schema.Attribute.Integer;
     publishedAt: Schema.Attribute.DateTime;
+    title: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    walk: Schema.Attribute.Integer;
   };
 }
 
@@ -1104,6 +1051,7 @@ export interface ApiProtectProtect extends Struct.SingleTypeSchema {
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     details: Schema.Attribute.RichText;
+    hero: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -1251,10 +1199,8 @@ export interface ApiRetailRetail extends Struct.CollectionTypeSchema {
       Schema.Attribute.Required &
       Schema.Attribute.Unique;
     sport: Schema.Attribute.Relation<'manyToOne', 'api::sport.sport'>;
-    tagline: Schema.Attribute.String;
     thickness: Schema.Attribute.Decimal;
     title: Schema.Attribute.String;
-    type: Schema.Attribute.Enumeration<['sup', 'kayak']>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1305,6 +1251,7 @@ export interface ApiShopShop extends Struct.SingleTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
+    collage: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1335,7 +1282,6 @@ export interface ApiSportSport extends Struct.CollectionTypeSchema {
       'manyToMany',
       'api::announcement.announcement'
     >;
-    brands: Schema.Attribute.Relation<'manyToMany', 'api::brand.brand'>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1380,7 +1326,6 @@ export interface ApiSunsetTourTimeSunsetTourTime
       'api::sunset-tour-time.sunset-tour-time'
     > &
       Schema.Attribute.Private;
-    name: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
     startDate: Schema.Attribute.Date;
     startTime: Schema.Attribute.Time;
@@ -1407,6 +1352,11 @@ export interface ApiTeamTeam extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    excerpt: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 160;
+        minLength: 50;
+      }>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::team.team'> &
       Schema.Attribute.Private;
@@ -1477,9 +1427,6 @@ export interface ApiTourTour extends Struct.CollectionTypeSchema {
   };
   attributes: {
     branch: Schema.Attribute.Relation<'manyToOne', 'api::branch.branch'>;
-    compositionImage: Schema.Attribute.Media<
-      'images' | 'files' | 'videos' | 'audios'
-    >;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1494,13 +1441,13 @@ export interface ApiTourTour extends Struct.CollectionTypeSchema {
     fitness: Schema.Attribute.Enumeration<
       ['easy peasy', 'easy', 'easy / moderate', 'moderate']
     >;
+    hero: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     information: Schema.Attribute.RichText;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::tour.tour'> &
       Schema.Attribute.Private;
     minimum: Schema.Attribute.Integer;
     name: Schema.Attribute.String & Schema.Attribute.Required;
-    ogimage: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     order: Schema.Attribute.Integer;
     peek: Schema.Attribute.String;
     price: Schema.Attribute.Integer;
@@ -2067,7 +2014,6 @@ declare module '@strapi/strapi' {
       'admin::user': AdminUser;
       'api::announcement.announcement': ApiAnnouncementAnnouncement;
       'api::attribute.attribute': ApiAttributeAttribute;
-      'api::blog.blog': ApiBlogBlog;
       'api::branch.branch': ApiBranchBranch;
       'api::brand.brand': ApiBrandBrand;
       'api::condition.condition': ApiConditionCondition;
@@ -2077,7 +2023,6 @@ declare module '@strapi/strapi' {
       'api::experience.experience': ApiExperienceExperience;
       'api::faq.faq': ApiFaqFaq;
       'api::group.group': ApiGroupGroup;
-      'api::imagegrab.imagegrab': ApiImagegrabImagegrab;
       'api::invasive.invasive': ApiInvasiveInvasive;
       'api::job.job': ApiJobJob;
       'api::location.location': ApiLocationLocation;

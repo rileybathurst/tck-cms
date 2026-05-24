@@ -65,7 +65,7 @@
       "minLength": 120,
       "maxLength": 160
     },
-    "ogimage": {
+    "hero": {
       "type": "media",
       "multiple": false,
       "required": false,
@@ -81,16 +81,6 @@
     },
     "experience": {
       "type": "string"
-    },
-    "compositionImage": {
-      "type": "media",
-      "multiple": false,
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
-      ]
     },
     "branch": {
       "type": "relation",

@@ -17,8 +17,8 @@
     },
     "slug": {
       "type": "string",
-      "unique": true,
       "required": true,
+      "unique": true,
       "regex": "^[a-z0-9\\-]*$"
     },
     "crew": {
@@ -46,13 +46,6 @@
     },
     "description": {
       "type": "richtext"
-    },
-    "type": {
-      "type": "enumeration",
-      "enum": [
-        "sup",
-        "kayak"
-      ]
     },
     "features": {
       "type": "richtext"
@@ -95,8 +88,8 @@
     },
     "excerpt": {
       "type": "string",
-      "maxLength": 160,
       "minLength": 120,
+      "maxLength": 160,
       "required": true
     },
     "brand": {
@@ -127,9 +120,6 @@
       "inversedBy": "retails"
     },
     "link": {
-      "type": "string"
-    },
-    "tagline": {
       "type": "string"
     }
   }

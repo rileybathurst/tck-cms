@@ -52,6 +52,11 @@
       "relation": "manyToMany",
       "target": "api::branch.branch",
       "mappedBy": "teams"
+    },
+    "excerpt": {
+      "type": "string",
+      "minLength": 50,
+      "maxLength": 160
     }
   }
 }

@@ -13,6 +13,16 @@
   "attributes": {
     "text": {
       "type": "richtext"
+    },
+    "collage": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
     }
   }
 }

@@ -28,12 +28,6 @@
     "season_end": {
       "type": "date"
     },
-    "blog": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::blog.blog",
-      "inversedBy": "branches"
-    },
     "phone": {
       "type": "integer"
     },
@@ -168,6 +162,45 @@
     },
     "lead": {
       "type": "richtext"
+    },
+    "hero": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "parking": {
+      "type": "string"
+    },
+    "parkings": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::parking.parking",
+      "mappedBy": "branch"
+    },
+    "logoImage": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "logoImageNegative": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
     }
   }
 }

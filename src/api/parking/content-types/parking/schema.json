@@ -1,5 +1,5 @@
 {
-  "kind": "singleType",
+  "kind": "collectionType",
   "collectionName": "parkings",
   "info": {
     "singularName": "parking",
@@ -11,13 +11,23 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "blocks": {
-      "type": "blocks"
+    "title": {
+      "type": "string"
     },
-    "excerpt": {
-      "type": "string",
-      "minLength": 50,
-      "maxLength": 160
+    "description": {
+      "type": "text"
+    },
+    "branch": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::branch.branch",
+      "inversedBy": "parkings"
+    },
+    "order": {
+      "type": "integer"
+    },
+    "walk": {
+      "type": "integer"
     }
   }
 }

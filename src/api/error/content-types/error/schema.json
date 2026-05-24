@@ -11,11 +11,11 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "excerpt": {
+    "title": {
       "type": "string"
     },
-    "return": {
-      "type": "blocks"
+    "description": {
+      "type": "richtext"
     }
   }
 }
