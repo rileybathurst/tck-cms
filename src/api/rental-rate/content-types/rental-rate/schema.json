@@ -44,9 +44,19 @@
     },
     "branches": {
       "type": "relation",
-      "relation": "oneToMany",
+      "relation": "manyToMany",
       "target": "api::branch.branch",
-      "mappedBy": "rental_rate"
+      "mappedBy": "rental_rates"
+    },
+    "hero": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
     }
   }
 }

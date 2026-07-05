@@ -154,9 +154,9 @@
     "rental_excerpt": {
       "type": "string"
     },
-    "rental_rate": {
+    "rental_rates": {
       "type": "relation",
-      "relation": "manyToOne",
+      "relation": "manyToMany",
       "target": "api::rental-rate.rental-rate",
       "inversedBy": "branches"
     },

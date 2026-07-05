@@ -578,8 +578,8 @@ export interface ApiBranchBranch extends Struct.CollectionTypeSchema {
     publishedAt: Schema.Attribute.DateTime;
     rental: Schema.Attribute.RichText;
     rental_excerpt: Schema.Attribute.String;
-    rental_rate: Schema.Attribute.Relation<
-      'manyToOne',
+    rental_rates: Schema.Attribute.Relation<
+      'manyToMany',
       'api::rental-rate.rental-rate'
     >;
     season_end: Schema.Attribute.Date;
@@ -670,6 +670,38 @@ export interface ApiConditionCondition extends Struct.CollectionTypeSchema {
     slug: Schema.Attribute.String &
       Schema.Attribute.Required &
       Schema.Attribute.Unique;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiConnectionConnection extends Struct.CollectionTypeSchema {
+  collectionName: 'connections';
+  info: {
+    displayName: 'connection';
+    pluralName: 'connections';
+    singularName: 'connection';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    excerpt: Schema.Attribute.String;
+    hero: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    link: Schema.Attribute.String;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::connection.connection'
+    > &
+      Schema.Attribute.Private;
+    name: Schema.Attribute.String;
+    publishedAt: Schema.Attribute.DateTime;
+    slug: Schema.Attribute.UID<'name'> & Schema.Attribute.Required;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1146,13 +1178,14 @@ export interface ApiRentalRateRentalRate extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
-    branches: Schema.Attribute.Relation<'oneToMany', 'api::branch.branch'>;
+    branches: Schema.Attribute.Relation<'manyToMany', 'api::branch.branch'>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     excerpt: Schema.Attribute.String;
     favorite: Schema.Attribute.Boolean;
     fullDay: Schema.Attribute.Integer;
+    hero: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     item: Schema.Attribute.String;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
@@ -2087,6 +2120,7 @@ declare module '@strapi/strapi' {
       'api::branch.branch': ApiBranchBranch;
       'api::brand.brand': ApiBrandBrand;
       'api::condition.condition': ApiConditionCondition;
+      'api::connection.connection': ApiConnectionConnection;
       'api::delivery.delivery': ApiDeliveryDelivery;
       'api::demo.demo': ApiDemoDemo;
       'api::error.error': ApiErrorError;
